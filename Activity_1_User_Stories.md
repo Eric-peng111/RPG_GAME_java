@@ -25,8 +25,6 @@ As a Player, I want the map to not be linear to allow myself to explore and not 
 As a Player, I want level’s environment to change when I move on to different levels to allow myself to keep 
 playing without getting bored by repetitive environment.
 
-As a Player, I want the mazes to be filled with traps to be challenged when traversing through the maze.
-
 As a Designer, I want to have a library where I can store objects for maps and environments to have an easy access when I am customising the levels.
 
 As a Designer, I want a game engine designed for RPG to have a built in library ready to use for my game.
