@@ -38,5 +38,11 @@ As a Player, I want melee, range and magic weapons to able to explore different 
 As a Player, I want to upgrade my weapons to allow myself to use my favourite weapons throughout the game in more difficult levels.
 
 
+Claude c (Inventory system and Chest)：
+As a player, I want to get loot after defeating an enemy, which I can use to improve my character's strength or appearance.
+
+As a player, I want to be able to carry items around with me， which I can use for different challenges in the game.
+
+As a player, I want to be able to save the items I get from the game so that I can satisfy my desire to collect items.
 
 
