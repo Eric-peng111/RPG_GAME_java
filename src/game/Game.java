@@ -5,10 +5,16 @@
  */
 package game;
 
+import java.awt.*;
 import java.util.*;     // required for ArrayList
+import java.util.List;
+
 import gameobjects.Actor;
+import gameobjects.Player;
 import gameobjects.Room;
 import globals.Direction;
+
+import javax.swing.*;
 
 public class Game {
 
@@ -25,14 +31,18 @@ public class Game {
         // --- construct a new adventure ---
         // Add Rooms to the map
         //                 Room( name,   description,                             N,        S,      W,      E )
-        map.add(new Room("Troll Room", "A dank room that smells of troll", Direction.NOEXIT, 2, Direction.NOEXIT, 1));
-        map.add(new Room("Forest", "A leafy woodland", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT));
-        map.add(new Room("Cave", "A dismal cave with walls covered in luminous moss", 0, Direction.NOEXIT, Direction.NOEXIT, 3));
-        map.add(new Room("Dungeon", "A nasty, dark cell", Direction.NOEXIT, Direction.NOEXIT, 2, Direction.NOEXIT));
+        map.add(new Room("town", "you have returned to town", 1, 2, 3, 4));
+        map.add(new Room("Lava", "a Lava River. Your path is cut by it, and across the stream is the orb of fire, you see a bridge.", Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("Water", " a Lake. A beautiful blue lake that sparkles in the night and in the middle floats an orb of water. ", 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("Forest", " a Lush Forest.  A field of trees surrounds you, in the distance is an orb of air floating. ", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, 0));
+        map.add(new Room("Cave", "a Cave. As you go deeper, you enter a great opening surrounded by wall of rocks covered in moss, you see an orb of earth in the wall. ", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT));
+        map.add(new Room("Hole", "a massive metal door. In the door, there are 4 elemental locks for air, water, earth and fire", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
         
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
-        player = new Actor("player", "a loveable game-player", map.get(0));
+        player = Player.getInstance();
+
     }
+
 
     // access methods
     // map
@@ -199,10 +209,12 @@ public class Game {
 
     public void showIntro(){
         String s;
-        s = "You have fallen down a rabbit hole and arrived in\n"+
-                "an underground cavern that smells strongly of troll.\n" +
-                "Where do you want to go? [Enter n, s, w or e]?\n" +
-                "(or enter q to quit)";
+        s = "The king had summoned you to defeat the evil magician VOID.\n " +
+                "While you were on your bravery path, the evil magician teleported you into the DUGEON OF DEATH.\n " +
+                "You wake up and see 4 paths, facing north, east, south, west and a hole you can jump in.\n" +
+                " Where do you wish to go?  \n" +
+                "\n" +
+                " ";
         System.out.println(s);
     }
     
