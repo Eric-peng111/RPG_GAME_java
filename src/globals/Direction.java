@@ -7,10 +7,13 @@
 package globals;
 
 public enum Direction {
-    NORTH, 
-    SOUTH, 
-    EAST, 
-    WEST;
+    NORTH,
+    SOUTH,
+    EAST,
+    WEST,
+    TOWN,
+    DUNGEON;
+
     /*
         NOEXIT has an integer value which is convenient when initializing the
         'Exit' fields in Room objects. All valid exists indicate a Room number

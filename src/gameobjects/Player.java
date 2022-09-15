@@ -1,6 +1,9 @@
 package gameobjects;
 
+import globals.Direction;
+
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class Player extends Actor{
 
@@ -21,7 +24,7 @@ public class Player extends Actor{
 
     public static Player getInstance()
     {
-        Room startRoom = new Room("town", "you have returned to town", 1, 2, 3, 4);
+        Room startRoom = new Room("town", "you have returned to town", 1, 2, 3, 4, 5, Direction.NOEXIT);
         if (single_instance == null)
             single_instance = new Player("player","player in the game", startRoom,1100, 300, 200, 0, 1);
 

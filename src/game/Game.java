@@ -16,6 +16,8 @@ import globals.Direction;
 
 import javax.swing.*;
 
+
+
 public class Game {
 
     private ArrayList <Room>map; // the map - an ArrayList of Rooms    
@@ -23,20 +25,20 @@ public class Game {
 
     List<String> commands = new ArrayList<>(Arrays.asList(
             "take", "drop", "look",
-            "n", "s", "w", "e"));
+            "n", "s", "w", "e","d","t"));
     List<String> objects = new ArrayList<>(Arrays.asList("sword", "ring", "snake"));
 
     public Game() {
         map = new ArrayList<Room>(); // TODO: Make map a Generic list of Room
         // --- construct a new adventure ---
         // Add Rooms to the map
-        //                 Room( name,   description,                             N,        S,      W,      E )
-        map.add(new Room("town", "you have returned to town", 1, 2, 3, 4));
-        map.add(new Room("Lava", "a Lava River. Your path is cut by it, and across the stream is the orb of fire, you see a bridge.", Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT));
-        map.add(new Room("Water", " a Lake. A beautiful blue lake that sparkles in the night and in the middle floats an orb of water. ", 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
-        map.add(new Room("Forest", " a Lush Forest.  A field of trees surrounds you, in the distance is an orb of air floating. ", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, 0));
-        map.add(new Room("Cave", "a Cave. As you go deeper, you enter a great opening surrounded by wall of rocks covered in moss, you see an orb of earth in the wall. ", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT));
-        map.add(new Room("Hole", "a massive metal door. In the door, there are 4 elemental locks for air, water, earth and fire", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        //                 Room( name,   description,                             N,        S,      W,      E,      D,      T )
+        map.add(new Room("the Town", "", 1, 2, 3, 4,5, Direction.NOEXIT));
+        map.add(new Room("Lava", "a Lava River. Your path is cut by it, and across the stream is the orb of fire, you see a bridge.", Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT));
+        map.add(new Room("Water", " a Lake. A beautiful blue lake that sparkles in the night and in the middle floats an orb of water. ", 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("Forest", " a Lush Forest.  A field of trees surrounds you, in the distance is an orb of air floating. ", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("Cave", "a Cave. As you go deeper, you enter a great opening surrounded by wall of rocks covered in moss, you see an orb of earth in the wall. ", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("DUNGEON", "a massive metal door stand before you. In the door, there are 4 elemental locks for air, water, earth and fire\n" + "Return to town [t]" , Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,0));
         
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
         player = Player.getInstance();
@@ -91,6 +93,12 @@ public class Game {
             case WEST:
                 exit = r.getW();
                 break;
+            case DUNGEON:
+                exit = r.getD();
+                break;
+            case TOWN:
+                exit = r.getT();
+                break;
             default:
                 exit = Direction.NOEXIT; // noexit - stay in same room
                 break;
@@ -124,6 +132,15 @@ public class Game {
         updateOutput(movePlayerTo(Direction.EAST));
     }
 
+    private void goD() {
+        updateOutput(movePlayerTo(Direction.DUNGEON));
+    }
+
+    private void goT() {
+        updateOutput(movePlayerTo(Direction.TOWN));
+    }
+
+
     private void updateOutput(int roomNumber) {
         // if roomNumber = NOEXIT, display a special message, otherwise
         // display text (e.g. name and description of room)        
@@ -132,7 +149,7 @@ public class Game {
             s = "No Exit!";
         } else {
             Room r = getPlayer().getLocation();
-            s = "You are in "
+            s = "You arrived at "
                     + r.getName() + ". " + r.getDescription();
         }
         System.out.println(s);
@@ -158,6 +175,12 @@ public class Game {
                     break;
                 case "e":
                     goE();
+                    break;
+                case "d":
+                    goD();
+                    break;
+                case "t":
+                    goT();
                     break;
                 default:
                     msg = verb + " (not yet implemented)";
@@ -209,12 +232,11 @@ public class Game {
 
     public void showIntro(){
         String s;
-        s = "The king had summoned you to defeat the evil magician VOID.\n " +
-                "While you were on your bravery path, the evil magician teleported you into the DUGEON OF DEATH.\n " +
-                "You wake up and see 4 paths, facing north, east, south, west and a hole you can jump in.\n" +
-                " Where do you wish to go?  \n" +
-                "\n" +
-                " ";
+        s = "The king had summoned you to defeat the evil magician VOID.\n"+
+                "As you seek for the magician, you found out that he had hid himself in the DUNGEON OF DEATH.\n" +
+                "You enter a town and see 4 paths, facing north, east, south, west and the path into the Dungeon.\n" +
+                "Where do you wish to go?\n" +
+                "[n,e,s,w or d]\n";
         System.out.println(s);
     }
     
