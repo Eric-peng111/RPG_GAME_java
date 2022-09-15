@@ -6,6 +6,8 @@
 
 package gameobjects;
 
+import java.util.ArrayList;
+
 public class Actor extends Thing {
 
     private Room location; // the Room where the Person is at present
@@ -18,7 +20,6 @@ public class Actor extends Thing {
     public void setLocation(Room aRoom) {
         location = aRoom;
     }
-
     public Room getLocation() {
         return location;
     }
