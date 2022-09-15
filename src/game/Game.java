@@ -20,11 +20,6 @@ public class Game {
 
     private ArrayList <Room>map; // the map - an ArrayList of Rooms    
     private Actor player;  // the player - provides 'first person perspective'
-    JFrame window;
-    Container container;
-    JPanel title, startButton, intro;
-    JLabel titleLabel;
-    JButton start;
 
     List<String> commands = new ArrayList<>(Arrays.asList(
             "take", "drop", "look",
@@ -45,39 +40,9 @@ public class Game {
         
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
         player = Player.getInstance();
-        // setup GUI layout
-        window = new JFrame();
-        window.setSize(800, 600);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.black);
-        window.setLayout(null);
-        window.setVisible(true);
-        container = window.getContentPane();
-        // set title for the game
-        title = new JPanel();
-        title.setBounds(100, 100, 600, 150);
-        title.setBackground(Color.white);
-        titleLabel = new JLabel("Game Name");
-        titleLabel.setForeground(Color.BLACK);
-        titleLabel.setFont(new Font("Times New Roman", Font.PLAIN, 90));
-        // set start button
-        startButton = new JPanel();
-        startButton.setBounds(300, 400, 200, 100);
-        startButton.setBackground(Color.BLUE);
-        start = new JButton("START");
-        start.setBackground(Color.BLACK);
-        start.setForeground(Color.white);
-        title.add(titleLabel);
-        container.add(title);
-        startButton.add(start);
-        container.add(startButton);
+
     }
-    public void createGameScreen(){
-        intro = new JPanel();
-        intro.setBounds(100, 100, 600, 250);
-        intro.setBackground(Color.BLUE);
-        container.add(intro);
-    }
+
 
     // access methods
     // map
