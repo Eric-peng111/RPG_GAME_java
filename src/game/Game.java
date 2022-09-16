@@ -25,10 +25,9 @@ public class Game {
         // --- construct a new adventure ---
         // Add Rooms to the map
         //                 Room( name,   description,                             N,        S,      W,      E )
-        map.add(new Room(" the Starting Point", "There are 4 paths, facing north, east, south, west, and a hole you can jump in.", Direction.NOEXIT, 2, Direction.NOEXIT, 1));
+        map.add(new Room("Troll Room", "A dank room that smells of troll", Direction.NOEXIT, 2, Direction.NOEXIT, 1));
         map.add(new Room("Forest", "A leafy woodland", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT));
-        map.add(new Room(" a Cave",  "As you go deeper, you enter a great opening surrounded by wall of rocks covered in moss,\n" +
-                "you see an orb of earth in the wall.", 0, Direction.NOEXIT, Direction.NOEXIT, 3));
+        map.add(new Room("Cave", "A dismal cave with walls covered in luminous moss", 0, Direction.NOEXIT, Direction.NOEXIT, 3));
         map.add(new Room("Dungeon", "A nasty, dark cell", Direction.NOEXIT, Direction.NOEXIT, 2, Direction.NOEXIT));
         
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
@@ -123,7 +122,7 @@ public class Game {
             s = "No Exit!";
         } else {
             Room r = getPlayer().getLocation();
-            s = "You arrived at"
+            s = "You are in "
                     + r.getName() + ". " + r.getDescription();
         }
         System.out.println(s);
@@ -200,13 +199,10 @@ public class Game {
 
     public void showIntro(){
         String s;
-        s = """
-                The king had summoned you to defeat the evil magician VOID.
-                While you were on your bravery path,\s
-                the evil magician teleported you into the DUNGEON OF DEATH.\s
-                You wake up and see 4 paths, facing north, east, south, west, and\s
-                a hole you can jump in. Where do you wish to go? [Enter n, s, w, e, or h]?
-                (or enter q to quit)""";
+        s = "You have fallen down a rabbit hole and arrived in\n"+
+                "an underground cavern that smells strongly of troll.\n" +
+                "Where do you want to go? [Enter n, s, w or e]?\n" +
+                "(or enter q to quit)";
         System.out.println(s);
     }
     
