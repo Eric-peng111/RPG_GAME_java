@@ -8,9 +8,9 @@ package gameobjects;
 
 public class Room extends Thing {
 
-    private int n, s, w, e, d, t;
+    private int n, s, w, e, d, t, i, o;
 
-    public Room(String aName, String aDescription, int aN, int aS, int aW, int aE, int aD, int aT) {
+    public Room(String aName, String aDescription, int aN, int aS, int aW, int aE, int aD, int aT, int aI, int aO) {
         super(aName, aDescription); // init superclass
         n = aN;
         s = aS;
@@ -18,6 +18,8 @@ public class Room extends Thing {
         e = aE;
         d = aD;
         t = aT;
+        i = aI;
+        o = aO;
 
     }
 
@@ -74,6 +76,22 @@ public class Room extends Thing {
 
     void setT(int aT) {
         t = aT;
+    }
+    // i
+    public int getI() {
+        return i;
+    }
+
+    void setI(int aI) {
+        i = aI;
+    }
+    // t
+    public int getO() {
+        return o;
+    }
+
+    void setO(int aO) {
+        t = aO;
     }
 
 
