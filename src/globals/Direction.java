@@ -12,8 +12,6 @@ public enum Direction {
     EAST,
     WEST,
     TOWN,
-    IN,
-    OUT,
     DUNGEON;
 
     /*
