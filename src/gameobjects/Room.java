@@ -8,17 +8,14 @@ package gameobjects;
 
 public class Room extends Thing {
 
-    private int n, s, w, e, d, t;
+    private int n, s, w, e;
 
-    public Room(String aName, String aDescription, int aN, int aS, int aW, int aE, int aD, int aT) {
+    public Room(String aName, String aDescription, int aN, int aS, int aW, int aE) {
         super(aName, aDescription); // init superclass
         n = aN;
         s = aS;
         w = aW;
         e = aE;
-        d = aD;
-        t = aT;
-
     }
 
     // --- accessor methods ---
@@ -28,7 +25,7 @@ public class Room extends Thing {
     }
 
     public void setN(int aN) {
-        n = aN;
+        n = aN; 
     }
 
     // s
@@ -57,25 +54,4 @@ public class Room extends Thing {
     void setW(int aW) {
         w = aW;
     }
-
-    // d
-    public int getD() {
-        return d;
-    }
-
-    void setD(int aD) {
-        d = aD;
-    }
-
-    // t
-    public int getT() {
-        return t;
-    }
-
-    void setT(int aT) {
-        t = aT;
-    }
-
-
-
 }
