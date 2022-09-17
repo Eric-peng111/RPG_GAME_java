@@ -4,10 +4,11 @@ import java.awt.*;
 import java.util.*;     // required for ArrayList
 import java.util.List;
 
-import gameobjects.Actor;
+import gameobjects.*;
+import globals.Direction;
 import gameobjects.Player;
+import gameobjects.Enemy;
 import gameobjects.Room;
-import gameobjects.Weapons;
 import globals.Direction;
 
 import javax.swing.*;
@@ -15,14 +16,14 @@ import javax.swing.*;
 
 
 public class Game {
+    private BattleSystem bs;
 
     private ArrayList <Room>map; // the map - an ArrayList of Rooms
-    private Actor player;  // the player - provides 'first person perspective'
+    private Player player;  // the player - provides 'first person perspective'
 
     List<String> commands = new ArrayList<>(Arrays.asList(
-            "take", "drop", "look",
+            "take", "drop", "look","fight",
             "n", "s", "w", "e","d","t","i","o"));
-    List<String> objects = new ArrayList<>(Arrays.asList("sword", "ring", "snake"));
 
     public Game() {
         map = new ArrayList<Room>(); // TODO: Make map a Generic list of Room
@@ -40,6 +41,7 @@ public class Game {
         map.add(new Room("the DUNGEON OF DEATH", " A massive metal door stand before you. In the door, there are 4 elemental locks for air, water, earth and fire.\n" + "Return to town [t] or Enter in [i]" , Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,0,6,Direction.NOEXIT));
         map.add(new Room("the arena of the Dungeon", "An Arena covered in blood, before you stands the evil magician VOID.\n" + "Leave the Arena [o]", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT,Direction.NOEXIT,5));
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
+        bs=new BattleSystem();
         player = Player.getInstance();
 
     }
@@ -56,11 +58,11 @@ public class Game {
     }
 
     // player
-    public Actor getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Actor aPlayer) {
+    public void setPlayer(Player aPlayer) {
         player = aPlayer;
     }
 
@@ -115,41 +117,53 @@ public class Game {
     }
 
     public int movePlayerTo(Direction dir) {
-        // return: Constant representing the room number moved to
-        // or NOEXIT (see moveTo())
-        //
-        return moveTo(player, dir);
+        int t =moveTo(player, dir);
+
+
+        if (t == Direction.NOEXIT) {
+            print("No Exit!");
+        } else {
+            showDetails();
+        }
+        return t;
     }
 
-    private void goN() {
+    public void showDetails(){
+        print("You are in the " + getPlayer().getLocation().describe());
+    }
+    public void print(String s){
+        System.out.println(s);
+    }
+
+    void goN() {
         updateOutput(movePlayerTo(Direction.NORTH));
     }
 
-    private void goS() {
+    void goS() {
         updateOutput(movePlayerTo(Direction.SOUTH));
     }
 
-    private void goW() {
+    void goW() {
         updateOutput(movePlayerTo(Direction.WEST));
     }
 
-    private void goE() {
+    void goE() {
         updateOutput(movePlayerTo(Direction.EAST));
     }
 
-    private void goD() {
+    void goD() {
         updateOutput(movePlayerTo(Direction.DUNGEON));
     }
 
-    private void goT() {
+    void goT() {
         updateOutput(movePlayerTo(Direction.TOWN));
     }
 
-    private void goI() {
+    void goI() {
         updateOutput(movePlayerTo(Direction.IN));
     }
 
-    private void goO() {
+    void goO() {
         updateOutput(movePlayerTo(Direction.OUT));
     }
 
@@ -168,72 +182,15 @@ public class Game {
         System.out.println(s);
     }
 
-    public String processVerb(List<String> wordlist) {
-        String verb;
-        String msg = "";
-
-        verb = wordlist.get(0);
-        if (!commands.contains(verb)) {
-            msg = verb + " is not a known verb! ";
-        } else {
-            switch (verb) {
-                case "n":
-                    goN();
-                    break;
-                case "s":
-                    goS();
-                    break;
-                case "w":
-                    goW();
-                    break;
-                case "e":
-                    goE();
-                    break;
-                case "d":
-                    goD();
-                    break;
-                case "t":
-                    goT();
-                    break;
-                case "i":
-                    goI();
-                    break;
-                case "o":
-                    goO();
-                    break;
-                default:
-                    msg = verb + " (not yet implemented)";
-                    break;
-            }
-        }
-        return msg;
-    }
-
-    public String processVerbNoun(List<String> wordlist) {
-        String verb;
-        String noun;
-        String msg = "";
-
-        verb = wordlist.get(0);
-        noun = wordlist.get(1);
-        if (!commands.contains(verb)) {
-            msg = verb + " is not a known verb! ";
-        }
-        if (!objects.contains(noun)) {
-            msg += (noun + " is not a known noun!");
-        }
-        msg += " (not yet implemented)";
-        return msg;
-    }
 
     public String parseCommand(List<String> wordlist) {
         String msg;
         if (wordlist.size() == 1) {
-            msg = processVerb(wordlist);
+            msg = Command.processVerb(wordlist);
         } else if (wordlist.size() == 2) {
-            msg = processVerbNoun(wordlist);
+            msg = Command.processVerbNoun(wordlist);
         } else {
-            msg = "Only 2 word commands allowed!";
+            msg = "please input 2 word commands !";
         }
         return msg;
     }
@@ -248,6 +205,15 @@ public class Game {
         }
         return strlist;
     }
+
+
+
+    public  void randomFight() {
+        print("----------Fight---------------");
+        print("you encountered an enemy. Time to fight");
+        this.player=bs.battle(new Enemy((int)(Math.random()*5), getPlayer().level, getPlayer().maxHp),getPlayer());
+    }
+
 
     public void showIntro(){
         String s;
@@ -275,3 +241,45 @@ public class Game {
     }
 
 }
+
+
+//public String processVerb(List<String> wordlist) {
+//        String verb;
+//        String msg = "";
+//
+//        verb = wordlist.get(0);
+//        if (!commands.contains(verb)) {
+//            msg = verb + " is not a known verb! ";
+//        } else {
+//            switch (verb) {
+//                case "n":
+//                    goN();
+//                    break;
+//                case "s":
+//                    goS();
+//                    break;
+//                case "w":
+//                    goW();
+//                    break;
+//                case "e":
+//                    goE();
+//                    break;
+//                case "d":
+//                    goD();
+//                    break;
+//                case "t":
+//                    goT();
+//                    break;
+//                case "i":
+//                    goI();
+//                    break;
+//                case "o":
+//                    goO();
+//                    break;
+//                default:
+//                    msg = verb + " (not yet implemented)";
+//                    break;
+//            }
+//        }
+//        return msg;
+//    }
