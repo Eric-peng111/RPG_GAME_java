@@ -1,38 +1,45 @@
-/*
- * Bitwise Books & Courses - sample Java code
- * http://www.bitwisebooks
- * http://www.bitwisecourses.com
- */
 package game;
 
+import java.awt.*;
 import java.util.*;     // required for ArrayList
+import java.util.List;
+
 import gameobjects.Actor;
+import gameobjects.Player;
 import gameobjects.Room;
 import globals.Direction;
 
+import javax.swing.*;
+
+
+
 public class Game {
 
-    private ArrayList <Room>map; // the map - an ArrayList of Rooms    
+    private ArrayList <Room>map; // the map - an ArrayList of Rooms
     private Actor player;  // the player - provides 'first person perspective'
 
     List<String> commands = new ArrayList<>(Arrays.asList(
             "take", "drop", "look",
-            "n", "s", "w", "e"));
+            "n", "s", "w", "e","d","t","i","o"));
     List<String> objects = new ArrayList<>(Arrays.asList("sword", "ring", "snake"));
 
     public Game() {
         map = new ArrayList<Room>(); // TODO: Make map a Generic list of Room
         // --- construct a new adventure ---
         // Add Rooms to the map
-        //                 Room( name,   description,                             N,        S,      W,      E )
-        map.add(new Room("Troll Room", "A dank room that smells of troll", Direction.NOEXIT, 2, Direction.NOEXIT, 1));
-        map.add(new Room("Forest", "A leafy woodland", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT));
-        map.add(new Room("Cave", "A dismal cave with walls covered in luminous moss", 0, Direction.NOEXIT, Direction.NOEXIT, 3));
-        map.add(new Room("Dungeon", "A nasty, dark cell", Direction.NOEXIT, Direction.NOEXIT, 2, Direction.NOEXIT));
-        
+        //                 Room( name,   description,                             N,        S,      W,      E,      D,      T,      I,      O )
+        map.add(new Room("the Town", "A quiet town, with 4 paths and road to the Dungeon\n" + "Where do you wish to go?\n" + "[n,e,s,w or d]\n", 1, 2, 3, 4,5, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("the Lava River", " Your path is cut by it, and across the stream is the orb of fire, you see a bridge.", Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("the Lake", " A beautiful blue lake that sparkles in the night and in the middle floats an orb of water. ", 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("the Forest", " A field of trees surrounds you, in the distance is an orb of air floating. ", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("the Cave", " As you go deeper, you enter a great opening surrounded by wall of rocks covered in moss, you see an orb of earth in the wall. ", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("the DUNGEON OF DEATH", " A massive metal door stand before you. In the door, there are 4 elemental locks for air, water, earth and fire.\n" + "Return to town [t] or Enter in [i]" , Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,0,6,Direction.NOEXIT));
+        map.add(new Room("the arena of the Dungeon", "An Arena covered in blood, before you stands the evil magician VOID.\n" + "Leave the Arena [o]", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT,Direction.NOEXIT,5));
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
-        player = new Actor("player", "a loveable game-player", map.get(0));
+        player = Player.getInstance();
+
     }
+
 
     // access methods
     // map
@@ -81,6 +88,18 @@ public class Game {
             case WEST:
                 exit = r.getW();
                 break;
+            case DUNGEON:
+                exit = r.getD();
+                break;
+            case TOWN:
+                exit = r.getT();
+                break;
+            case IN:
+                exit = r.getI();
+                break;
+            case OUT:
+                exit = r.getO();
+                break;
             default:
                 exit = Direction.NOEXIT; // noexit - stay in same room
                 break;
@@ -94,7 +113,7 @@ public class Game {
     public int movePlayerTo(Direction dir) {
         // return: Constant representing the room number moved to
         // or NOEXIT (see moveTo())
-        //        
+        //
         return moveTo(player, dir);
     }
 
@@ -114,15 +133,32 @@ public class Game {
         updateOutput(movePlayerTo(Direction.EAST));
     }
 
+    private void goD() {
+        updateOutput(movePlayerTo(Direction.DUNGEON));
+    }
+
+    private void goT() {
+        updateOutput(movePlayerTo(Direction.TOWN));
+    }
+
+    private void goI() {
+        updateOutput(movePlayerTo(Direction.IN));
+    }
+
+    private void goO() {
+        updateOutput(movePlayerTo(Direction.OUT));
+    }
+
+
     private void updateOutput(int roomNumber) {
         // if roomNumber = NOEXIT, display a special message, otherwise
-        // display text (e.g. name and description of room)        
+        // display text (e.g. name and description of room)
         String s;
         if (roomNumber == Direction.NOEXIT) {
             s = "No Exit!";
         } else {
             Room r = getPlayer().getLocation();
-            s = "You are in "
+            s = "You arrived at "
                     + r.getName() + ". " + r.getDescription();
         }
         System.out.println(s);
@@ -131,7 +167,7 @@ public class Game {
     public String processVerb(List<String> wordlist) {
         String verb;
         String msg = "";
-        
+
         verb = wordlist.get(0);
         if (!commands.contains(verb)) {
             msg = verb + " is not a known verb! ";
@@ -149,6 +185,18 @@ public class Game {
                 case "e":
                     goE();
                     break;
+                case "d":
+                    goD();
+                    break;
+                case "t":
+                    goT();
+                    break;
+                case "i":
+                    goI();
+                    break;
+                case "o":
+                    goO();
+                    break;
                 default:
                     msg = verb + " (not yet implemented)";
                     break;
@@ -161,7 +209,7 @@ public class Game {
         String verb;
         String noun;
         String msg = "";
-        
+
         verb = wordlist.get(0);
         noun = wordlist.get(1);
         if (!commands.contains(verb)) {
@@ -186,35 +234,36 @@ public class Game {
         return msg;
     }
 
-    public static List<String> wordList(String input) {        
-        String delims = "[ \t,.:;?!\"']+"; 
-        List<String> strlist = new ArrayList<>();      
+    public static List<String> wordList(String input) {
+        String delims = "[ \t,.:;?!\"']+";
+        List<String> strlist = new ArrayList<>();
         String[] words = input.split(delims);
-    
+
         for (String word : words) {
             strlist.add(word);
-        }        
+        }
         return strlist;
     }
 
     public void showIntro(){
         String s;
-        s = "You have fallen down a rabbit hole and arrived in\n"+
-                "an underground cavern that smells strongly of troll.\n" +
-                "Where do you want to go? [Enter n, s, w or e]?\n" +
-                "(or enter q to quit)";
+        s = "The king had summoned you to defeat the evil magician VOID.\n"+
+                "As you seek for the magician, you found out that he had hid himself in the DUNGEON OF DEATH.\n" +
+                "You enter a town and see 4 paths, facing north, east, south, west and the path into the Dungeon.\n" +
+                "Where do you wish to go?\n" +
+                "[n,e,s,w or d]\n";
         System.out.println(s);
     }
-    
+
     public String runCommand(String inputstr) {
         List<String> wordlist;
         String s = "ok";
-        String lowstr = inputstr.trim().toLowerCase();        
+        String lowstr = inputstr.trim().toLowerCase();
         if (!lowstr.equals("q")) {
             if (lowstr.equals("")) {
                 s = "You must enter a command";
             } else {
-                wordlist = wordList(lowstr);                
+                wordlist = wordList(lowstr);
                 s = parseCommand(wordlist);
             }
         }
