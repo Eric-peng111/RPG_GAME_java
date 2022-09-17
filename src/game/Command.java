@@ -35,10 +35,10 @@ public class Command {
         if (!error) {
             switch (verb) {
                 case "take":
-                    //msg = AdventureGame.game.takeOb(noun);
+                    msg = AdventureGame.game.takeOb(noun);
                     break;
                 case "drop":
-                    //msg = AdventureGame.game.dropOb(noun);
+                    msg = AdventureGame.game.dropOb(noun);
                     break;
                 default:
                     msg += " (not yet implemented)";
