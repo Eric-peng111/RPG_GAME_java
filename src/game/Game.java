@@ -11,6 +11,8 @@ import gameobjects.Enemy;
 import gameobjects.Room;
 import globals.Direction;
 
+import gameobjects.Thing;
+
 import javax.swing.*;
 
 
@@ -239,8 +241,39 @@ public class Game {
         }
         return s;
     }
+    public String takeOb(String obname) {
+        String retStr = "";
+        Thing t = player.getLocation().getThings().thisOb(obname);
+
+        if (obname.equals("")) {
+            obname = "nameless object"; // if no object specified
+        }
+        if (t == null) {
+            retStr = "There is no " + obname + " here!";
+        } else {
+            transferOb(t, player.getLocation().getThings(), player.getThings());
+            retStr = obname + " taken!";
+        }
+        return retStr;
+    }
+
+    public String dropOb(String obname) {
+        String retStr = "";
+        Thing t = player.getThings().thisOb(obname);
+
+        if (obname.equals("")) {
+            retStr = "You'll have to tell me which object you want to drop!"; // if no object specified
+        } else if (t == null) {
+            retStr = "You haven't got one of those!";
+        } else {
+            transferOb(t, player.getThings(), player.getLocation().getThings());
+            retStr = obname + " dropped!";
+        }
+        return retStr;
+    }
 
 }
+
 
 
 //public String processVerb(List<String> wordlist) {
