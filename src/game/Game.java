@@ -7,6 +7,7 @@ import java.util.List;
 import gameobjects.Actor;
 import gameobjects.Player;
 import gameobjects.Room;
+import gameobjects.Weapons;
 import globals.Direction;
 
 import javax.swing.*;
@@ -25,6 +26,9 @@ public class Game {
 
     public Game() {
         map = new ArrayList<Room>(); // TODO: Make map a Generic list of Room
+        Weapons sword = new Weapons("Iron Sword", "A trusty sword", 100);
+        Weapons bow = new Weapons("Wooden Bow", "An accurate bow", 150);
+        Weapons staff = new Weapons("Magical Staff", "A staff filled with power", 200);
         // --- construct a new adventure ---
         // Add Rooms to the map
         //                 Room( name,   description,                             N,        S,      W,      E,      D,      T,      I,      O )

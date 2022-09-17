@@ -3,14 +3,16 @@ package gameobjects;
 import globals.Direction;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class Player extends Actor{
 
 
     private static Player single_instance = null;
-    public int maxHp, hp, attack, level,xp,gold;
+    private int maxHp, hp, attack, level,xp,gold;
+    private Weapons wp;
     private ArrayList<Thing> bag;
-    private Player(String aName, String aDescription, Room aRoom,int maxHp, int attack, int xp, int gold, int level) {
+    private Player(String aName, String aDescription, Room aRoom,int maxHp, int attack, int xp, int gold, int level, Weapons weapon) {
         super(aName, aDescription, aRoom);
         this.maxHp = maxHp;
         this.hp = maxHp;
@@ -19,34 +21,23 @@ public class Player extends Actor{
         this.gold = gold;
         this.level = level;
         this.bag = new ArrayList<Thing>();
+        wp = weapon;
+    }
+    public Weapons getWp() {
+        return wp;
+    }
+
+    public void setWp(Weapons weapon) {
+        wp = weapon;
     }
 
     public static Player getInstance()
     {
+        Weapons sword = new Weapons("Iron Sword", "A trusty sword", 100);
         Room startRoom = new Room("town", "you have returned to town", 1, 2, 3, 4, 5, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT);
         if (single_instance == null)
-            single_instance = new Player("player","player in the game", startRoom,2000, 300, 200, 0, 1);
+            single_instance = new Player("player","player in the game", startRoom,1100, 300 + sword.getDmg() , 200, 0, 1, sword);
 
         return single_instance;
     }
-
-
-    public int attack(){
-        return (int) (Math.random()*xp/4+this.level*this.attack);
-    }
-
-
-    public int levelUp(){
-        if(this.level<10){
-            this.level++;
-            return this.level;
-        }
-        else
-            return -1;
-    }
-
-    public void setHP(int i){
-        this.hp=this.hp-i;
-    }
-
 }
