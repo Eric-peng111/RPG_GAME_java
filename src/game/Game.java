@@ -181,7 +181,7 @@ public class Game {
             s = "You arrived at "
                     + r.getName() + ". " + r.getDescription();
         }
-        System.out.println(s);
+        //System.out.println(s);
     }
 
 
@@ -241,9 +241,11 @@ public class Game {
         }
         return s;
     }
+
+
     public String takeOb(String obname) {
         String retStr = "";
-        Thing t = player.getLocation().getThings().thisOb(obname);
+        Thing t = player.getLocation().getThings().contains();
 
         if (obname.equals("")) {
             obname = "nameless object"; // if no object specified
