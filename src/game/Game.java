@@ -19,9 +19,13 @@ import javax.swing.*;
 
 public class Game {
     private BattleSystem bs;
+    private ShopSystem ss;
 
     private ArrayList <Room>map; // the map - an ArrayList of Rooms
     private Player player;  // the player - provides 'first person perspective'
+    Weapons sword = new Weapons("Iron Sword", "A trusty sword", 100, 100);
+    Weapons bow = new Weapons("Wooden Bow", "An accurate bow", 150, 150);
+    Weapons staff = new Weapons("Magical Staff", "A staff filled with power", 200, 200);
 
     List<String> commands = new ArrayList<>(Arrays.asList(
             "take", "drop", "look","fight",
@@ -29,9 +33,6 @@ public class Game {
 
     public Game() {
         map = new ArrayList<Room>(); // TODO: Make map a Generic list of Room
-        Weapons sword = new Weapons("Iron Sword", "A trusty sword", 100);
-        Weapons bow = new Weapons("Wooden Bow", "An accurate bow", 150);
-        Weapons staff = new Weapons("Magical Staff", "A staff filled with power", 200);
         // --- construct a new adventure ---
         // Add Rooms to the map
         //                 Room( name,   description,                             N,        S,      W,      E,      D,      T,      I,      O )
@@ -44,6 +45,7 @@ public class Game {
         map.add(new Room("the arena of the Dungeon", "An Arena covered in blood, before you stands the evil magician VOID.\n" + "Leave the Arena [o]", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT,Direction.NOEXIT,5));
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
         bs=new BattleSystem();
+        ss = new ShopSystem();
         player = Player.getInstance();
 
     }
@@ -245,7 +247,7 @@ public class Game {
 
     public String takeOb(String obname) {
         String retStr = "";
-        Thing t = player.getLocation().getThings().contains();
+        Thing t = player.getLocation().getThings().thisOb(obname);
 
         if (obname.equals("")) {
             obname = "nameless object"; // if no object specified
@@ -258,6 +260,11 @@ public class Game {
         }
         return retStr;
     }
+
+    private void transferOb(Thing t, ThingContainer things, ThingContainer things1) {
+        player.bag.add(t);
+    }
+
 
     public String dropOb(String obname) {
         String retStr = "";
@@ -274,6 +281,28 @@ public class Game {
         return retStr;
     }
 
+    public void accessShop() {
+        // Check that the player is in town
+        Room loc = player.getLocation();
+        GroceryContainer shopList = new GroceryContainer();
+        shopList.add(sword);
+        shopList.add(bow);
+        shopList.add(staff);
+        if (loc.getName().equals("town")){
+            print("Hello, what would you like to buy today?");
+            print(shopList.describeWeapons());
+            print("(enter weapon number to purchase.)");
+            print("Your balance: "+player.getGold());
+            ss.buyItem(shopList);
+        }
+        else{
+            print("You must be in town to access the shop");
+        }
+    }
+
+    public void accessBag() {
+        print(player.bag.describeThings());
+    }
 }
 
 

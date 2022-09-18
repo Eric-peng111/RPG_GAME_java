@@ -40,6 +40,8 @@ public class BattleSystem implements java.io.Serializable{
                     print("you have defeated the enemy "+e.getName());
                     player.xp=++e.expReward;
                     print("you have got new XP from enemy for "+e.expReward+ " points");
+                    player.gold=++e.goldReward;
+                    print("you have gained "+e.expReward+ " gold from this battle, you have "+player.gold+" gold now.");
                     break;
                 }
                 i++;

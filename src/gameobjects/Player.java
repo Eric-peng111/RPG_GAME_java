@@ -27,14 +27,20 @@ public class Player extends Actor{
     public Weapons getWp(int i) {
         return wp.get(i);
     }
+    public ThingContainer getThings(){
+        return this.bag;
+    }
+    public int getGold(){
+        return this.gold;
+    }
 
 
     public static Player getInstance()
     {
-        Weapons sword = new Weapons("Iron Sword", "A trusty sword", 100);
+        Weapons sword = new Weapons("Iron Sword", "A trusty sword", 100, 50);
         Room startRoom = new Room("town", "you have returned to town", 1, 2, 3, 4, 5, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT);
         if (single_instance == null)
-            single_instance = new Player("player","player in the game", startRoom,1100, 300 + sword.getDmg() , 200, 0, 1, sword);
+            single_instance = new Player("player","player in the game", startRoom,1100, 300 + sword.getDmg() , 200, 1000, 1, sword);
 
         return single_instance;
     }
@@ -66,6 +72,20 @@ public class Player extends Actor{
     }
     public void dropWeapons(Weapons w){
         wp.remove(w);
+    }
+    public String use(Thing t){
+        for (Thing x : bag){
+            if (t.getName().equals(x.getName())){
+                if (x instanceof Weapons){
+                    attack = ((Weapons) x).getDmg();
+                    return "You have equipped this weapon.";
+                }
+                else if (x instanceof Item) {
+                    return ((Item) x).useItem();
+                }
+            }
+        }
+        return "item not found.";
     }
 
 
