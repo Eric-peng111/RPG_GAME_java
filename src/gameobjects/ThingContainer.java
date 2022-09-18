@@ -9,7 +9,7 @@ public class ThingContainer extends ArrayList<Thing> implements java.io.Serializ
         String s = "";
 
         if (this.size() == 0) {
-            s = "";
+            s = "You have nothing in your bag yet.";
         } else {
             for (Thing t : this) {
                 s = s + t.getName() + ": " + t.getDescription() + "\n";

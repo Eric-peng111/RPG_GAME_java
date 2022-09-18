@@ -1,5 +1,8 @@
 package game;
 
+import gameobjects.Player;
+import gameobjects.Room;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.List;
 public class Command {
 
     static List<String> commands = new ArrayList<>(Arrays.asList(
-            "take", "drop", "look", "l", "i", "inventory","fight",
+            "take", "drop", "look", "l", "i", "inventory","fight","shop","bag",
             "n", "s", "w", "e",
             "save", "load"));
     static List<String> objects = new ArrayList<>(Arrays.asList("carrot", "sausage",
@@ -83,6 +86,12 @@ public class Command {
                 case "l":
                 case "fight":
                     AdventureGame.game.randomFight();
+                case "shop":
+                    AdventureGame.game.accessShop();
+                    break;
+                case "bag":
+                    AdventureGame.game.accessBag();
+                    break;
                 case "look":
                     //AdventureGame.game.look();
                     break;

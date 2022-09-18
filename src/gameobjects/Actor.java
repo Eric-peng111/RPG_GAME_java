@@ -6,17 +6,26 @@
 
 package gameobjects;
 
-public class Actor extends Thing {
+public class Actor {
 
+    private String name;
+    private String description;
     private Room location; // the Room where the Person is at present
 
     public Actor(String aName, String aDescription, Room aRoom) {
-        super(aName, aDescription); // init super class
+        this.name = aName;
+        this.description = aDescription;
         location = aRoom;
     }
 
     public void setLocation(Room aRoom) {
         location = aRoom;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getDescription() {
+        return description;
     }
 
     public Room getLocation() {
