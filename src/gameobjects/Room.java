@@ -95,8 +95,6 @@ public class Room extends Thing {
 
     public void randomInit(ItemContainer IC,WeaponContainer WC){
         this.gc.clear();
-        System.out.println(IC.size());
-        System.out.println(WC.size());
         int i=(int)(Math.random()*IC.size());
         int w=(int)(Math.random()*WC.size());
         ItemContainer ic=(ItemContainer) IC.clone();

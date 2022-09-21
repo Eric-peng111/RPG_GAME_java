@@ -9,7 +9,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -24,6 +28,7 @@ public class DataInit {
         init_w();
         getObjects();
     }
+    Path path = Paths.get("src");
 
     public ItemContainer init_t(){
 
@@ -32,7 +37,7 @@ public class DataInit {
         JSONParser parser = new JSONParser();
         try {
 
-            Object obj = parser.parse(new FileReader("/Users/ericpeng/IdeaProjects/workshop-10-group-1/src/game/Json/items.json"));
+            Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/game/Json/items.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray em= (JSONArray) jsonObject.get("items");
             Iterator itr=em.iterator();
@@ -60,8 +65,7 @@ public class DataInit {
 
         JSONParser parser = new JSONParser();
         try {
-
-            Object obj = parser.parse(new FileReader("/Users/ericpeng/IdeaProjects/workshop-10-group-1/src/game/Json/weapon.json"));
+            Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/game/Json/weapon.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray em= (JSONArray) jsonObject.get("Weapons");
             Iterator itr=em.iterator();
@@ -100,4 +104,6 @@ public class DataInit {
         else
             return null;
     }
+
+
 }

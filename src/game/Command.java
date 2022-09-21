@@ -12,7 +12,7 @@ public class Command {
 
     static List<String> commands = new ArrayList<>(Arrays.asList(
             "take", "drop", "look", "l", "i", "inventory","fight","shop","bag","profile","help","map",
-            "n", "s", "w", "e",
+            "n", "s", "w", "e","d","t","i","o",
             "save", "load"));
 
 

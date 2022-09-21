@@ -44,7 +44,12 @@ public class ShopSystem {
                 }
                 else{
                     player.gold = player.getGold() - p;
-                    //player.bag.add(grocery);
+                    if (grocery instanceof Weapons){
+                        player.wp.add((Weapons) grocery);
+                    }
+                    else {
+                        player.bag.add((Item) grocery);
+                    }
                 print("You have successfully purchased the item, you have " + player.gold + " remaining.");}
                 AdventureGame.game.accessShop();
             }
