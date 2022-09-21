@@ -1,0 +1,29 @@
+{
+  "name": "Weapons",
+  "Weapons": [
+    {
+      "name": "sword",
+      "description": "sword",
+      "attack": 100,
+      "price": 100
+    },
+    {
+      "name": "Bow",
+      "description": "An accurate bow",
+      "attack": 150,
+      "price": 150
+    },
+    {
+      "name": "Staff",
+      "description": "A staff filled with power",
+      "attack": 200,
+      "price": 200
+    },
+    {
+      "name": "dagger",
+      "description": "A small dagger",
+      "attack": 50,
+      "price": 50
+    }
+  ]
+}
