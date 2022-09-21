@@ -6,9 +6,7 @@ import java.util.Arrays;
 public class Room extends Thing {
 
     private int n, s, w, e, d, t, i, o;
-    private ThingContainer tc;
-
-    private ArrayList<String> random_thing;
+    private GroceryContainer gc;
 
     public Room(String aName, String aDescription, int aN, int aS, int aW, int aE, int aD, int aT, int aI, int aO) {
         super(aName, aDescription); // init superclass
@@ -20,9 +18,7 @@ public class Room extends Thing {
         t = aT;
         i = aI;
         o = aO;
-        random_thing=new ArrayList<>(Arrays.asList("sword", "ring", "Wombat", "shield", "potion"));
-        this.tc=new ThingContainer();
-        randomInit();
+        this.gc=new GroceryContainer();
 
     }
 
@@ -97,22 +93,35 @@ public class Room extends Thing {
         t = aO;
     }
 
-    public void randomInit(){
-        int i=(int)(Math.random()*random_thing.size());
+    public void randomInit(ItemContainer IC,WeaponContainer WC){
+        this.gc.clear();
+        System.out.println(IC.size());
+        System.out.println(WC.size());
+        int i=(int)(Math.random()*IC.size());
+        int w=(int)(Math.random()*WC.size());
+        ItemContainer ic=(ItemContainer) IC.clone();
+        WeaponContainer wc=(WeaponContainer) WC.clone();
         for(int j=0;j<i;j++){
-            int t=(int)Math.random()*random_thing.size();
-            this.tc.add(new Thing(random_thing.get(t),"this is a thing to get"));
-            random_thing.remove(t);
+            int t=(int)Math.random()*ic.size();
+            this.gc.add(ic.get(t));
+            ic.remove(t);
+        }
+
+        for(int j=0;j<w;j++){
+            int t=(int)Math.random()*wc.size();
+            this.gc.add(wc.get(t));
+            wc.remove(t);
         }
     }
 
-    public ThingContainer setupThings(Thing t){
-        tc.add(t);
-        return tc;
+
+    public GroceryContainer setupThings(Grocery t){
+        gc.add(t);
+        return gc;
     }
 
-    public ThingContainer getThings(){
-        return this.tc;
+    public GroceryContainer getThings(){
+        return this.gc;
     }
 
 
@@ -120,8 +129,6 @@ public class Room extends Thing {
     public String describe() {
         String roomdesc;
         String thingsdesc;
-
-
 
         roomdesc = String.format("%s. %s.", getName(), getDescription());
         thingsdesc = getThings().describeThings();
@@ -131,6 +138,51 @@ public class Room extends Thing {
         return roomdesc+"\n\nif u wanna go deeper to find more adventures，type fight";
     }
 
+    public GroceryContainer merge(WeaponContainer wc,ItemContainer ic){
+        GroceryContainer gr=new GroceryContainer();
+        for(Grocery g:ic){
+            gr.add(g);
+        }
+        for(Grocery g:wc){
+            gr.add(g);
+        }
+        return  gr;
+    }
+
 
 
 }
+
+//    public void randomInit(ItemContainer IC,WeaponContainer WC){
+//        this.gc.clear();
+//        GroceryContainer g=new GroceryContainer();
+//        g=merge(WC,IC);
+//        int i=(int)(Math.random()*g.size());
+//
+//        for(int j=0;j<i;j++){
+//            int t=(int)Math.random()*g.size();
+//            this.gc.add(g.get(t));
+//            g.remove(t);
+//        }
+//
+//    }
+
+// public void randomInit(ItemContainer IC,WeaponContainer WC){
+//        this.gc.clear();
+//        GroceryContainer g=new GroceryContainer();
+//        int i=(int)(Math.random()*IC.size());
+//        int w=(int)(Math.random()*WC.size());
+//        ItemContainer ic=IC;
+//        WeaponContainer wc=WC;
+//        for(int j=0;j<i;j++){
+//            int t=(int)Math.random()*ic.size();
+//            this.gc.add(ic.get(t));
+//            ic.remove(t);
+//        }
+//        ic= new ItemContainer();
+//        for(int j=0;j<w;j++){
+//            int t=(int)Math.random()*wc.size();
+//            this.gc.add(wc.get(t));
+//            wc.remove(t);
+//        }
+//    }

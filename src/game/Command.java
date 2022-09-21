@@ -11,16 +11,12 @@ import java.util.List;
 public class Command {
 
     static List<String> commands = new ArrayList<>(Arrays.asList(
-            "take", "drop", "look", "l", "i", "inventory","fight","shop","bag",
+            "take", "drop", "look", "l", "i", "inventory","fight","shop","bag","profile","help","map",
             "n", "s", "w", "e",
             "save", "load"));
-    static List<String> objects = new ArrayList<>(Arrays.asList("carrot", "sausage",
-            "paper", "pencil", "ring", "wombat"));
 
 
-
-
-    static String processVerbNoun(List<String> wordlist) {
+    static String processVerbNoun(List<String> wordlist,List<String> objects) {
         String verb;
         String noun;
         String msg = "";
@@ -91,6 +87,9 @@ public class Command {
                     break;
                 case "bag":
                     AdventureGame.game.accessBag();
+                    break;
+                case "profile":
+                    AdventureGame.game.showProfile();
                     break;
                 case "look":
                     //AdventureGame.game.look();

@@ -3,8 +3,8 @@ package gameobjects;
 import globals.ItemType;
 
 public class Item extends Grocery{
-    int stat;
-    ItemType type;
+    public int stat;
+    public ItemType type;
     public Item(String aName, String aDescription, int pc, int st, ItemType t) {
         super(aName, aDescription, pc);
         stat = st;
@@ -26,4 +26,8 @@ public class Item extends Grocery{
         }
         return "You have successfully used this item!";
     }
+
+
+
+
 }
