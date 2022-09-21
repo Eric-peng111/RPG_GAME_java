@@ -44,7 +44,7 @@ public class ShopSystem {
                 }
                 else{
                     player.gold = player.getGold() - p;
-                    player.bag.add(grocery);
+                    //player.bag.add(grocery);
                 print("You have successfully purchased the item, you have " + player.gold + " remaining.");}
                 AdventureGame.game.accessShop();
             }
@@ -58,3 +58,4 @@ public class ShopSystem {
     }
 
 }
+

@@ -1,6 +1,6 @@
 package game;
 
-import java.awt.*;
+
 import java.util.*;     // required for ArrayList
 import java.util.List;
 
@@ -23,16 +23,15 @@ public class Game {
 
     private ArrayList <Room>map; // the map - an ArrayList of Rooms
     private Player player;  // the player - provides 'first person perspective'
-    Weapons sword = new Weapons("Iron Sword", "A trusty sword", 100, 100);
-    Weapons bow = new Weapons("Wooden Bow", "An accurate bow", 150, 150);
-    Weapons staff = new Weapons("Magical Staff", "A staff filled with power", 200, 200);
 
-    List<String> commands = new ArrayList<>(Arrays.asList(
-            "take", "drop", "look","fight",
-            "n", "s", "w", "e","d","t","i","o"));
+
+    private static WeaponContainer G_Weapon=new WeaponContainer();
+    private static ItemContainer G_item=new ItemContainer();
+
+    ArrayList<String> objects;
 
     public Game() {
-        map = new ArrayList<Room>(); // TODO: Make map a Generic list of Room
+        map = new ArrayList<Room>();
         // --- construct a new adventure ---
         // Add Rooms to the map
         //                 Room( name,   description,                             N,        S,      W,      E,      D,      T,      I,      O )
@@ -47,6 +46,10 @@ public class Game {
         bs=new BattleSystem();
         ss = new ShopSystem();
         player = Player.getInstance();
+        DataInit DI=new DataInit();
+        G_item=DI.ic;
+        G_Weapon= DI.wc;
+        objects=DI.objects;
 
     }
 
@@ -72,7 +75,9 @@ public class Game {
 
     // move a Person (typically the player) to a Room
     private void moveActorTo(Actor p, Room aRoom) {
+
         p.setLocation(aRoom);
+        aRoom.randomInit(G_item,G_Weapon);
     }
 
     // move an Actor in direction 'dir'
@@ -111,7 +116,7 @@ public class Game {
                 exit = r.getO();
                 break;
             default:
-                exit = Direction.NOEXIT; // noexit - stay in same room
+                exit = Direction.NOEXIT; // no exit - stay in same room
                 break;
         }
         if (exit != Direction.NOEXIT) {
@@ -192,7 +197,7 @@ public class Game {
         if (wordlist.size() == 1) {
             msg = Command.processVerb(wordlist);
         } else if (wordlist.size() == 2) {
-            msg = Command.processVerbNoun(wordlist);
+            msg = Command.processVerbNoun(wordlist,objects);
         } else {
             msg = "please input 2 word commands !";
         }
@@ -215,7 +220,8 @@ public class Game {
     public  void randomFight() {
         print("----------Fight---------------");
         print("you encountered an enemy. Time to fight");
-        this.player=bs.battle(new Enemy((int)(Math.random()*5), getPlayer().level, getPlayer().maxHp),getPlayer());
+        bs.battle(new Enemy((int)(Math.random()*5), getPlayer().level, getPlayer().maxHp),getPlayer());
+
     }
 
 
@@ -244,40 +250,70 @@ public class Game {
         return s;
     }
 
-
     public String takeOb(String obname) {
         String retStr = "";
-        Thing t = player.getLocation().getThings().thisOb(obname);
-
         if (obname.equals("")) {
-            obname = "nameless object"; // if no object specified
+            obname = "nameless object";
+            // if no object specified
+            return obname;
         }
-        if (t == null) {
-            retStr = "There is no " + obname + " here!";
-        } else {
-            transferOb(t, player.getLocation().getThings(), player.getThings());
-            retStr = obname + " taken!";
-        }
+        if (checkString(obname) == 0) {
+             return "There is no " + obname + " here!";
+        } else if (checkString(obname) == 1) {
+            this.player.extract_W(findW(obname),1);
+        }else
+            this.player.extract_I(findI(obname),1);
+        //print("wp for player"+this.player.wp.describeWeapons());
+
+        retStr = obname + " taken!";
         return retStr;
     }
 
-    private void transferOb(Thing t, ThingContainer things, ThingContainer things1) {
-        player.bag.add(t);
+
+    public Weapons findW(String s){
+        for(Weapons w:G_Weapon){
+            if(s.equals(w.getName()))
+                return w;
+        }
+        return null;
     }
+
+    public Item findI(String s){
+        for(Item i :G_item){
+            if(s.equals(i.getName()))
+                return i;
+        }
+        return null;
+    }
+    public int checkString(String s){
+        for(Weapons w:G_Weapon){
+            if(s.equals(w.getName()))
+                return 1;
+        }
+        for(Item i :G_item){
+            if(s.equals(i.getName()))
+                return -1;
+        }
+        return 0;
+    }
+
 
 
     public String dropOb(String obname) {
         String retStr = "";
-        Thing t = player.getThings().thisOb(obname);
-
         if (obname.equals("")) {
-            retStr = "You'll have to tell me which object you want to drop!"; // if no object specified
-        } else if (t == null) {
-            retStr = "You haven't got one of those!";
-        } else {
-            transferOb(t, player.getThings(), player.getLocation().getThings());
-            retStr = obname + " dropped!";
+            obname = "nameless object";
+            // if no object specified
+            return obname;
         }
+        if (checkString(obname) == 0) {
+            return "There is no " + obname + " here!";
+        } else if (checkString(obname) == 1) {
+            this.player.extract_W(findW(obname),-1);
+        }else
+            this.player.extract_I(findI(obname),-1);
+
+        retStr = obname + " drop!";
         return retStr;
     }
 
@@ -285,9 +321,7 @@ public class Game {
         // Check that the player is in town
         Room loc = player.getLocation();
         GroceryContainer shopList = new GroceryContainer();
-        shopList.add(sword);
-        shopList.add(bow);
-        shopList.add(staff);
+
         if (loc.getName().equals("town")){
             print("Hello, what would you like to buy today?");
             print(shopList.describeWeapons());
@@ -301,7 +335,14 @@ public class Game {
     }
 
     public void accessBag() {
-        print(player.bag.describeThings());
+        print("item: ");
+        print(this.player.bag.describeThings());
+        print("weapons:");
+        print(this.player.wp.describeWeapons());
+    }
+
+    public void showProfile(){
+        print(this.player.profile());
     }
 }
 

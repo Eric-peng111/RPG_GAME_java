@@ -22,7 +22,7 @@ public class Enemy extends Actor{
     public Enemy(int i,int level,int playHP){
 
         super(enemies[i], "The "+enemies[i]+" is coming", null);
-        this.attack=300*level/2;
+        this.attack=200*level/2;
         this.maxHp=3*playHP/2;
         this.hp =3*playHP/2;
         this.expReward=10;

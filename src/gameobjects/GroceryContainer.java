@@ -2,7 +2,7 @@ package gameobjects;
 
 import java.util.ArrayList;
 
-public class GroceryContainer extends ArrayList<Grocery> implements java.io.Serializable {
+public class GroceryContainer extends ArrayList<Grocery>  {
     public String describeWeapons() {
         String s = "";
 
@@ -21,5 +21,36 @@ public class GroceryContainer extends ArrayList<Grocery> implements java.io.Seri
             }
         }
         return s;
+    }
+
+
+
+    public String describeThings() {
+        String s = "";
+
+        if (this.size() == 0) {
+            s = "Unfortunately, nothing here";
+        } else {
+            for (Grocery t : this) {
+                s = s + t.getName() + ": " + t.getDescription() + "\n";
+            }
+        }
+        return s;
+    }
+
+
+
+    public Thing thisOb(String aName) {
+        Thing athing = null;
+        String thingName = "";
+        String aNameLowCase = aName.trim().toLowerCase();
+
+        for (Thing t : this) {
+            thingName = t.getName().trim().toLowerCase();
+            if (thingName.equals(aNameLowCase)) {
+                athing = t;
+            }
+        }
+        return athing;
     }
 }
