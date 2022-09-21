@@ -35,7 +35,7 @@ public class Game {
         // --- construct a new adventure ---
         // Add Rooms to the map
         //                 Room( name,   description,                             N,        S,      W,      E,      D,      T,      I,      O )
-        map.add(new Room("the Town", "A quiet town, with 4 paths and road to the Dungeon\n" + "Where do you wish to go?\n" + "[n,e,s,w or d]\n", 1, 2, 3, 4,5, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
+        map.add(new Room("town", "A quiet town, with 4 paths and road to the Dungeon\n" + "Where do you wish to go?\n" + "[n,e,s,w or d]\n", 1, 2, 3, 4,5, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
         map.add(new Room("the Lava River", " Your path is cut by it, and across the stream is the orb of fire, you see a bridge.", Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
         map.add(new Room("the Lake", " A beautiful blue lake that sparkles in the night and in the middle floats an orb of water. ", 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
         map.add(new Room("the Forest", " A field of trees surrounds you, in the distance is an orb of air floating. ", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
@@ -321,6 +321,12 @@ public class Game {
         // Check that the player is in town
         Room loc = player.getLocation();
         GroceryContainer shopList = new GroceryContainer();
+        for (int i = 0; i <= G_item.size() - 1; i++){
+            shopList.add(G_item.get(i));
+        }
+        for (int i = 0; i <= G_Weapon.size() - 1; i++){
+            shopList.add(G_Weapon.get(i));
+        }
 
         if (loc.getName().equals("town")){
             print("Hello, what would you like to buy today?");
