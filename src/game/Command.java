@@ -94,6 +94,8 @@ public class Command {
                 case "look":
                     //AdventureGame.game.look();
                     break;
+                case "map":
+                    AdventureGame.game.showMap();
                 case "inventory":
                     break;
                 default:
