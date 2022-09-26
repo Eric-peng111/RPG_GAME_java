@@ -1,21 +1,26 @@
 package game;
 
-import gameobjects.Player;
-import gameobjects.Room;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/** Represents commands that the player can use
+ * @author Enze Peng, Sijie Fan, Nha Ngo, Qiuyu Chen
+ */
 public class Command {
-
+    /** Represents the list of available commands
+     */
     static List<String> commands = new ArrayList<>(Arrays.asList(
             "take", "drop", "look", "l", "i", "inventory","fight","shop","bag","profile","help","map",
             "n", "s", "w", "e","d","t","i","o",
             "save", "load"));
-
-
+    /**
+     * Method to process dropping or taking an object
+     * @author Qiuyu Chen
+     * @param wordlist - list of strings representing the word to be processed
+     * @param objects - list of strings representing available nouns
+     * @return - String representing the result of action
+     */
     static String processVerbNoun(List<String> wordlist,List<String> objects) {
         String verb;
         String noun;
@@ -46,7 +51,12 @@ public class Command {
         }
         return msg;
     }
-
+    /**
+     * Method to process general user commands
+     * @author Nha Ngo, Enze Peng, Sijie Fan
+     * @param wordlist - list of strings representing the word to be processed
+     * @return - String representing the result of action
+     */
     static String processVerb(List<String> wordlist) {
         String verb;
         String msg = "";
@@ -105,10 +115,6 @@ public class Command {
             }
         }
         return msg;
-    }
-
-    public static void main(String[] args) {
-
     }
 }
 

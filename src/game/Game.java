@@ -9,27 +9,35 @@ import globals.Direction;
 import gameobjects.Player;
 import gameobjects.Enemy;
 import gameobjects.Room;
-import globals.Direction;
-
-import gameobjects.Thing;
-
-import javax.swing.*;
-
-
-
+/** Represents a single game
+ * @author Enze Peng, Sijie Fan, Nha Ngo, Qiuyu Chen
+ */
 public class Game {
+    /** BattleSystem in the game
+     */
     private BattleSystem bs;
+    /** ShopSystem in the game
+     */
     private ShopSystem ss;
-
+    /** Represents the map of the game
+     */
     private ArrayList <Room>map; // the map - an ArrayList of Rooms
+    /** Represents the player in the game
+     */
     private Player player;  // the player - provides 'first person perspective'
-
-
+    /** Represents all weapons in the game
+     */
     private static WeaponContainer G_Weapon=new WeaponContainer();
+    /** Represents all items in the game
+     */
     private static ItemContainer G_item=new ItemContainer();
-
+    /** Represents all Strings of objects in the game
+     */
     ArrayList<String> objects;
-
+    /**
+     * Class Constructor for Game
+     * @author Nha Ngo, EnzePeng, Sijie Fan
+     */
     public Game() {
         map = new ArrayList<Room>();
         // --- construct a new adventure ---
@@ -50,30 +58,43 @@ public class Game {
         G_item=DI.ic;
         G_Weapon= DI.wc;
         objects=DI.objects;
-
     }
 
 
     // access methods
     // map
-    private ArrayList getMap() {
+    /**
+     * Method to get map in a game
+     * @author Nha Ngo
+     * @return - ArrayList<Room> representing the map
+     */
+    private ArrayList<Room> getMap() {
         return map;
     }
-
+    /**
+     * Method to set map in a game
+     * @author Nha Ngo
+     * @param aMap - ArrayList<Room> representing the map
+     */
     private void setMap(ArrayList<Room> aMap) {
         map = aMap;
     }
 
     // player
+    /**
+     * Method to get player in a game
+     * @author Enze Peng
+     * @return - Player representing the current player
+     */
     public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player aPlayer) {
-        player = aPlayer;
-    }
-
-    // move a Person (typically the player) to a Room
+    /**
+     * Method to move the player to another room
+     * @author Nha Ngo
+     * @param aRoom  - Room to be moved to
+     */
     private void moveActorTo(Actor p, Room aRoom) {
 
         p.setLocation(aRoom);
@@ -81,6 +102,13 @@ public class Game {
     }
 
     // move an Actor in direction 'dir'
+    /**
+     * Method to move the player to another room
+     * @author Nha Ngo
+     * @param anActor  - Character to be moved
+     * @param dir - Direction the be moved
+     * @return - int representing the room number moved to
+     */
     private int moveTo(Actor anActor, Direction dir) {
         // return: Constant representing the room number moved to
         // or NOEXIT
@@ -124,7 +152,12 @@ public class Game {
         }
         return exit;
     }
-
+    /**
+     * Method to move the player to a direction
+     * @author Nha Ngo
+     * @param dir - Direction the be moved
+     * @return - int representing the room number moved to
+     */
     public int movePlayerTo(Direction dir) {
         int t =moveTo(player, dir);
 
@@ -136,47 +169,82 @@ public class Game {
         }
         return t;
     }
-
+    /**
+     * Method to print out details of the current room
+     * @author Enze Peng
+     */
     public void showDetails(){
         print("You are in the " + getPlayer().getLocation().describe());
     }
+    /**
+     * Method for printing our text in the terminal
+     * @author Enze Peng
+     * @param s - String to be printed
+     */
     public void print(String s){
         System.out.println(s);
     }
-
+    /**
+     * Method for player moving north
+     * @author Enze Peng
+     */
     void goN() {
         updateOutput(movePlayerTo(Direction.NORTH));
     }
-
+    /**
+     * Method for player moving south
+     * @author Enze Peng
+     */
     void goS() {
         updateOutput(movePlayerTo(Direction.SOUTH));
     }
-
+    /**
+     * Method for player moving west
+     * @author Enze Peng
+     */
     void goW() {
         updateOutput(movePlayerTo(Direction.WEST));
     }
-
+    /**
+     * Method for player moving east
+     * @author Enze Peng
+     */
     void goE() {
         updateOutput(movePlayerTo(Direction.EAST));
     }
-
+    /**
+     * Method for player moving down
+     * @author Enze Peng
+     */
     void goD() {
         updateOutput(movePlayerTo(Direction.DUNGEON));
     }
-
+    /**
+     * Method for player moving to town
+     * @author Enze Peng
+     */
     void goT() {
         updateOutput(movePlayerTo(Direction.TOWN));
     }
-
+    /**
+     * Method for player moving inside
+     * @author Enze Peng
+     */
     void goI() {
         updateOutput(movePlayerTo(Direction.IN));
     }
-
+    /**
+     * Method for player moving outside
+     * @author Enze Peng
+     */
     void goO() {
         updateOutput(movePlayerTo(Direction.OUT));
     }
-
-
+    /**
+     * Method to update the player`s location
+     * @author Enze Peng
+     * @param roomNumber - int representing room number the player arrived at
+     */
     private void updateOutput(int roomNumber) {
         // if roomNumber = NOEXIT, display a special message, otherwise
         // display text (e.g. name and description of room)
@@ -190,8 +258,12 @@ public class Game {
         }
         //System.out.println(s);
     }
-
-
+    /**
+     * Method for processing a single command
+     * @author Enze Peng
+     * @param wordlist - list of String representing the word to be processed
+     * @return - String showing the result of the command
+     */
     public String parseCommand(List<String> wordlist) {
         String msg;
         if (wordlist.size() == 1) {
@@ -203,7 +275,11 @@ public class Game {
         }
         return msg;
     }
-
+    /**
+     * Method for generating a wordlist to be processed
+     * @author Enze Peng
+     * @param input - String input to be converted to a wordlist
+     */
     public static List<String> wordList(String input) {
         String delims = "[ \t,.:;?!\"']+";
         List<String> strlist = new ArrayList<>();
@@ -215,16 +291,20 @@ public class Game {
         return strlist;
     }
 
-
-
+    /**
+     * Method for starting a random fight
+     * @author Enze Peng
+     */
     public  void randomFight() {
         print("----------Fight---------------");
         print("you encountered an enemy. Time to fight");
         bs.battle(new Enemy((int)(Math.random()*5), getPlayer().level, getPlayer().maxHp),getPlayer());
 
     }
-
-
+    /**
+     * Method to print out intro message of the game
+     * @author Enze Peng
+     */
     public void showIntro(){
         String s;
         s = "The king had summoned you to defeat the evil magician VOID.\n"+
@@ -234,7 +314,12 @@ public class Game {
                 "[n,e,s,w or d]\n";
         System.out.println(s);
     }
-
+    /**
+     * Method to run a single command
+     * @author Enze Peng
+     * @param inputstr - String of the command entered by the user
+     * @return - String showing result of the command
+     */
     public String runCommand(String inputstr) {
         List<String> wordlist;
         String s = "ok";
@@ -249,7 +334,12 @@ public class Game {
         }
         return s;
     }
-
+    /**
+     * Method to take an object
+     * @author Qiuyu Chen
+     * @param obname - String representing name of the object to be taken
+     * @return - String representing result of the action
+     */
     public String takeOb(String obname) {
         String retStr = "";
         if (obname.equals("")) {
@@ -269,7 +359,12 @@ public class Game {
         return retStr;
     }
 
-
+    /**
+     * Method to find a weapon in the weapon list
+     * @author Enze Peng
+     * @param s - String representing name of the weapon to be found
+     * @return - Weapons representing the weapon found
+     */
     public Weapons findW(String s){
         for(Weapons w:G_Weapon){
             if(s.equals(w.getName()))
@@ -277,7 +372,12 @@ public class Game {
         }
         return null;
     }
-
+    /**
+     * Method to find an item in the weapon list
+     * @author Enze Peng
+     * @param s - String representing name of the item to be found
+     * @return - Weapons representing the item found
+     */
     public Item findI(String s){
         for(Item i :G_item){
             if(s.equals(i.getName()))
@@ -285,6 +385,12 @@ public class Game {
         }
         return null;
     }
+    /**
+     * Method to check if the name string is valid and exists
+     * @author Enze Peng
+     * @param s - String of an object name
+     * @return - int indicating whether the name string is valid and exists, 1 for yes and 0 for no
+     */
     public int checkString(String s){
         for(Weapons w:G_Weapon){
             if(s.equals(w.getName()))
@@ -297,8 +403,12 @@ public class Game {
         return 0;
     }
 
-
-
+    /**
+     * Method to drop an object
+     * @author Qiuyu Chen
+     * @param obname - String representing name of the object to be dropped
+     * @return - String representing result of the action
+     */
     public String dropOb(String obname) {
         String retStr = "";
         if (obname.equals("")) {
@@ -316,7 +426,10 @@ public class Game {
         retStr = obname + " drop!";
         return retStr;
     }
-
+    /**
+     * Method to access the shop
+     * @author Sijie Fan
+     */
     public void accessShop() {
         // Check that the player is in town
         Room loc = player.getLocation();
@@ -330,8 +443,8 @@ public class Game {
 
         if (loc.getName().equals("town")){
             print("Hello, what would you like to buy today?");
-            print(shopList.describeWeapons());
-            print("(enter weapon number to purchase.)");
+            print(shopList.describeShop());
+            print("(enter weapon number to purchase, or enter 0 to leave the shop.)");
             print("Your balance: "+player.getGold());
             ss.buyItem(shopList);
         }
@@ -339,17 +452,27 @@ public class Game {
             print("You must be in town to access the shop");
         }
     }
-
+    /**
+     * Method to access the bag
+     * @author Sijie Fan
+     */
     public void accessBag() {
         print("item: ");
         print(this.player.bag.describeThings());
         print("weapons:");
         print(this.player.wp.describeWeapons());
     }
-
+    /**
+     * Method to access the profile
+     * @author Enze Peng
+     */
     public void showProfile(){
         print(this.player.profile());
     }
+    /**
+     * Method to access the map
+     * @author Qiuyu Chen
+     */
     public void showMap(){
         String s;
         s =     "-------------------    ---------   Lava River (fire) N     ---------      -------------------\n"+
