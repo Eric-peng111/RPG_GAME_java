@@ -1,9 +1,16 @@
 package gameobjects;
 
 import java.util.ArrayList;
-
+/** Represents an arraylist of weapons
+ * @author Enze Peng
+ */
 public class WeaponContainer extends ArrayList<Weapons> implements java.io.Serializable {
 
+    /**
+     * Method to print out list of items in an WeaponContainer
+     * @author Enze Peng
+     * @return - String describing all items in the WeaponContainer
+     */
     public String describeWeapons() {
         String s = "";
 

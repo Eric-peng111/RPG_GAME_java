@@ -3,13 +3,30 @@ package game;
 import gameobjects.*;
 
 import java.util.Scanner;
-
+/** Represents the shopping system in the game
+ * @author Sijie Fan
+ */
 public class ShopSystem {
+    /** Represents the scanner to receive user input
+     */
     private Scanner scanner;
+    /** Represents the current player
+     */
     Player player = Player.getInstance();
+    /**
+     * Class Constructor for ShopSystem
+     * @author Sijie Fan
+     */
     public ShopSystem(){
         scanner = new Scanner(System.in);
     }
+
+    /**
+     * Method for receiving user int put for item for purchase.
+     * @author Sijie Fan
+     * @param max - int for number of choices allowed
+     * @return int acquired from user input
+     */
     public int readChoice(int max){
         int input;
         do{
@@ -23,6 +40,11 @@ public class ShopSystem {
 
         return input;
     }
+    /**
+     * Method for user buying items in the shop
+     * @author Sijie Fan
+     * @param wc - GroceryContainer for shop items
+     */
     public void buyItem(GroceryContainer wc){
         int input = readChoice(wc.size());
         if (input == 0){
@@ -58,6 +80,11 @@ public class ShopSystem {
 
 
     }
+    /**
+     * Method for printing our text in the terminal
+     * @author Enze Peng
+     * @param s - String to be printed
+     */
     public void print(String s){
         System.out.println(s);
     }

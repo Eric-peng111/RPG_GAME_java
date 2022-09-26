@@ -9,16 +9,26 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Scanner;
-
+/** Represents the fighting system in the game
+ * @author Enze Peng
+ */
 public class BattleSystem implements java.io.Serializable{
-
-
+    /** Represents the scanner to receive user input
+     */
     private  Scanner scan;
-
+    /**
+     * Class Constructor for BattleSystem
+     * @author EnzePeng
+     */
     public BattleSystem(){
         scan=new Scanner(System.in);
     }
-
+    /**
+     * Method for fighting with an enemy
+     * @author Enze Peng
+     * @param e - Enemy to be fought with
+     * @param player - Player representing current player
+     */
     public void battle(Enemy e, Player player) {
         int input,i=1;
         Boolean v=false;
@@ -37,16 +47,7 @@ public class BattleSystem implements java.io.Serializable{
             }
             else if(input ==2){
                 Item temp= getItems(player);
-
-                if(temp.type== ItemType.HEAL)
-                {
-                    player.hp=player.hp+temp.stat;
-                }
-                else{
-                    buff= temp.stat;
-                }
-                player.bag.remove(temp);//clear used item from bags
-                print(temp.getName()+" has been used");
+                temp.useItem();
             }
             else{
                 print("You are in the " + player.getLocation().describe());
@@ -79,7 +80,11 @@ public class BattleSystem implements java.io.Serializable{
 
 
     }
-
+    /**
+     * Method for choosing to fight in what way
+     * @author Enze Peng
+     * @param player - Player representing current player
+     */
     public int fight(Player player){
         print("you have 2 options to fight:\n(1)with a weapon in your bag\n(2)with your hand");
         int input=(readChoice(2));
@@ -96,16 +101,25 @@ public class BattleSystem implements java.io.Serializable{
         return 0;
 
     }
-
+    /**
+     * Method choosing to use an item from the bag
+     * @author Enze Peng
+     * @param player - Player representing current player
+     * @return - item to be used
+     */
     public Item getItems(Player player){
         print("Here are items in your bag");
         print(player.bag.describeThings());
         print("\nwhich items u want to use in the fight? Enter a num");
         int input=(readChoice(player.bag.size()));
         return player.bag.get(input-1);
-
     }
-
+    /**
+     * Method for receiving user int put for fighting
+     * @author Enze Peng
+     * @param max - int for number of choices allowed
+     * @return int acquired from user input
+     */
     public  int readChoice(int max){
         int input;
         do{
@@ -120,7 +134,11 @@ public class BattleSystem implements java.io.Serializable{
         return input;
 
     }
-
+    /**
+     * Method for printing our text in the terminal
+     * @author Enze Peng
+     * @param s - String to be printed
+     */
     public static void print(String s){
         System.out.println(s);
     }

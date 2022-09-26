@@ -8,28 +8,41 @@ import globals.ItemType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-import java.io.File;
 import java.io.FileReader;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
-
+/** Class to read and save data from Json files
+ * @author Enze Peng
+ */
 public class DataInit {
-
+    /** Represents the items stored
+     */
     public ItemContainer ic;
+    /** Represents the weapons stored
+     */
     public WeaponContainer wc;
+    /** Represents Strings to be converted into weapons and items
+     */
     public ArrayList<String> objects;
-
+    /**
+     * Class Constructor for DataInit
+     * @author Enze Peng
+     */
     DataInit(){
         init_t();
         init_w();
         getObjects();
     }
+    /** Represents filepath to be used when reading and storing data
+     */
     Path path = Paths.get("src");
-
+    /**
+     * Method to read items from the stored Json file
+     * @author Enze Peng
+     * @return - ItemContainer of all the items read
+     */
     public ItemContainer init_t(){
 
         this.ic=new ItemContainer();
@@ -55,10 +68,12 @@ public class DataInit {
         }
 
         return ic;
-
-
     }
-
+    /**
+     * Method to read weapons from the stored Json file
+     * @author Enze Peng
+     * @return - WeaponContainer of all the items read
+     */
     public WeaponContainer init_w(){
 
         this.wc= new WeaponContainer();
@@ -82,10 +97,11 @@ public class DataInit {
         }
 
         return wc;
-
-
     }
-
+    /**
+     * Method to convert weapons and items into Strings
+     * @author Enze Peng
+     */
     public void getObjects(){
         this.objects=new ArrayList<>();
         for(Weapons w:this.wc){
@@ -95,7 +111,12 @@ public class DataInit {
             objects.add(i.getName());
         }
     }
-
+    /**
+     * Method to convert between String and ItemType
+     * @author Enze Peng
+     * @param s - String to be converted to ItemType
+     * @return - ItemType represented by the input String
+     */
     private ItemType convert(String s){
         if(s.toLowerCase().equals("heal"))
             return ItemType.HEAL;
