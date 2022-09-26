@@ -10,8 +10,4 @@ public class Weapons extends Grocery{
         return dmg;
     }
     public int getPrice(){return price;}
-
-    public void setDmg(int damage) {
-        dmg = damage;
-    }
 }

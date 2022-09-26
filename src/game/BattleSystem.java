@@ -121,10 +121,6 @@ public class BattleSystem implements java.io.Serializable{
 
     }
 
-    public void returnBack(){
-
-    }
-
     public static void print(String s){
         System.out.println(s);
     }

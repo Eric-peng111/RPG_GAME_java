@@ -24,12 +24,6 @@ public class Player extends Actor{
         this.wp=new WeaponContainer();
         wp.add(weapon);
     }
-    public Weapons getWp(int i) {
-        return wp.get(i);
-    }
-    public ItemContainer getThings(){
-        return this.bag;
-    }
     public int getGold(){
         return this.gold;
     }
@@ -58,16 +52,6 @@ public class Player extends Actor{
         }
     }
 
-    public void showBags(){
-        System.out.println(bag);
-    }
-
-    public void showWeapons(){
-        for(int i=0;i<wp.size();i++){
-            System.out.println((i+1)+" "+wp.get(i));
-        }
-    }
-
     public void addToBags(Item t){
         bag.add(t);
     }
@@ -80,21 +64,6 @@ public class Player extends Actor{
     public void dropWeapons(Weapons w){
         wp.remove(w);
     }
-    public String use(Thing t){
-        for (Thing x : bag){
-            if (t.getName().equals(x.getName())){
-                if (x instanceof Weapons){
-                    attack = ((Weapons) x).getDmg();
-                    return "You have equipped this weapon.";
-                }
-                else if (x instanceof Item) {
-                    return ((Item) x).useItem();
-                }
-            }
-        }
-        return "item not found.";
-    }
-
     public int extract_W(Weapons w,int i){
        if(i!=1){
           this.getLocation().getThings().add(w);
@@ -134,19 +103,6 @@ public class Player extends Actor{
 
     }
 
-
-    public int levelUp(){
-        if(this.level<10){
-            this.level++;
-            return this.level;
-        }
-        else
-            return -1;
-    }
-
-    public void setHP(int i){
-        this.hp=this.hp-i;
-    }
 
     public String profile(){
         String s="";

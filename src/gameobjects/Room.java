@@ -28,9 +28,6 @@ public class Room extends Thing {
         return n;
     }
 
-    public void setN(int aN) {
-        n = aN;
-    }
 
     // s
     public int getS() {
@@ -46,52 +43,33 @@ public class Room extends Thing {
         return e;
     }
 
-    public void setE(int aE) {
-        e = aE;
-    }
-
     // w
     public int getW() {
         return w;
     }
 
-    void setW(int aW) {
-        w = aW;
-    }
 
     // d
     public int getD() {
         return d;
     }
 
-    void setD(int aD) {
-        d = aD;
-    }
 
     // t
     public int getT() {
         return t;
     }
 
-    void setT(int aT) {
-        t = aT;
-    }
     // i
     public int getI() {
         return i;
     }
 
-    void setI(int aI) {
-        i = aI;
-    }
     // t
     public int getO() {
         return o;
     }
 
-    void setO(int aO) {
-        t = aO;
-    }
 
     public void randomInit(ItemContainer IC,WeaponContainer WC){
         this.gc.clear();
@@ -112,11 +90,6 @@ public class Room extends Thing {
         }
     }
 
-
-    public GroceryContainer setupThings(Grocery t){
-        gc.add(t);
-        return gc;
-    }
 
     public GroceryContainer getThings(){
         return this.gc;
@@ -150,37 +123,3 @@ public class Room extends Thing {
 
 
 }
-
-//    public void randomInit(ItemContainer IC,WeaponContainer WC){
-//        this.gc.clear();
-//        GroceryContainer g=new GroceryContainer();
-//        g=merge(WC,IC);
-//        int i=(int)(Math.random()*g.size());
-//
-//        for(int j=0;j<i;j++){
-//            int t=(int)Math.random()*g.size();
-//            this.gc.add(g.get(t));
-//            g.remove(t);
-//        }
-//
-//    }
-
-// public void randomInit(ItemContainer IC,WeaponContainer WC){
-//        this.gc.clear();
-//        GroceryContainer g=new GroceryContainer();
-//        int i=(int)(Math.random()*IC.size());
-//        int w=(int)(Math.random()*WC.size());
-//        ItemContainer ic=IC;
-//        WeaponContainer wc=WC;
-//        for(int j=0;j<i;j++){
-//            int t=(int)Math.random()*ic.size();
-//            this.gc.add(ic.get(t));
-//            ic.remove(t);
-//        }
-//        ic= new ItemContainer();
-//        for(int j=0;j<w;j++){
-//            int t=(int)Math.random()*wc.size();
-//            this.gc.add(wc.get(t));
-//            wc.remove(t);
-//        }
-//    }

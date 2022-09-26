@@ -38,19 +38,4 @@ public class GroceryContainer extends ArrayList<Grocery>  {
         return s;
     }
 
-
-
-    public Thing thisOb(String aName) {
-        Thing athing = null;
-        String thingName = "";
-        String aNameLowCase = aName.trim().toLowerCase();
-
-        for (Thing t : this) {
-            thingName = t.getName().trim().toLowerCase();
-            if (thingName.equals(aNameLowCase)) {
-                athing = t;
-            }
-        }
-        return athing;
-    }
 }

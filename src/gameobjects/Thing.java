@@ -22,15 +22,8 @@ public class Thing {
         return name;
     }
 
-    public void setName(String aName) {
-        name = aName;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String aDescription) {
-        description = aDescription;
-    }
 }
