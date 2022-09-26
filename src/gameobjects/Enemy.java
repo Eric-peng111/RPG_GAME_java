@@ -34,7 +34,4 @@ public class Enemy extends Actor{
         return (int) (Math.random()*10+this.attack);
     }
 
-    public void setHP(int i){
-        this.hp=this.hp-i;
-    }
 }
