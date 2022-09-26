@@ -82,6 +82,7 @@ public class Command {
                 case "l":
                 case "fight":
                     AdventureGame.game.randomFight();
+                    break;
                 case "shop":
                     AdventureGame.game.accessShop();
                     break;
