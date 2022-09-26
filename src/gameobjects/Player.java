@@ -50,6 +50,13 @@ public class Player extends Actor{
     }
 
     public int w_attack(Weapons w){return (int) (Math.random()*xp/4+w.getDmg()*level);}
+    public void checkUpgrade(){
+        if (xp >= 10){
+            xp = xp - 10;
+            level = level + 1;
+            System.out.println("You have upgraded one level, you are now level " + level + "!.");
+        }
+    }
 
     public void showBags(){
         System.out.println(bag);
