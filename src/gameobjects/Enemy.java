@@ -3,6 +3,7 @@ package gameobjects;
 public class Enemy extends Actor{
 
     public static String[] enemies = {"Giant", "Goblin", "Wolf", "vampire", "Snake"};
+    public static String[] boss;
 
     public int maxHp, hp, attack, level, goldReward, expReward;
     // The thing you get after you defeat the enemy
