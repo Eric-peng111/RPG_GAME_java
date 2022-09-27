@@ -8,13 +8,13 @@
       "price": 100
     },
     {
-      "name": "Bow",
+      "name": "bow",
       "description": "An accurate bow",
       "attack": 150,
       "price": 150
     },
     {
-      "name": "Staff",
+      "name": "staff",
       "description": "A staff filled with power",
       "attack": 200,
       "price": 200
@@ -24,6 +24,12 @@
       "description": "A small dagger",
       "attack": 50,
       "price": 50
+    },
+    {
+      "name":"self dagger",
+      "description":"one dagger one hero",
+      "attack":250,
+      "price":100
     }
   ]
 }

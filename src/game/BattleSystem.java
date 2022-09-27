@@ -49,7 +49,7 @@ public class BattleSystem implements java.io.Serializable{
                 Item temp= getItems(player);
                 temp.useItem();
             }
-            else{
+            else if(input==3){
                 print("You are in the " + player.getLocation().describe());
                 break;
             }
@@ -129,7 +129,10 @@ public class BattleSystem implements java.io.Serializable{
                 input=-1;
                 print("pls enter a valid number");
             }
-        }while (false);
+            if(input>max || input<=0)
+                print("u only have "+max+" choices");
+
+        }while(input>max || input<=0);
 
         return input;
 
