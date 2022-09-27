@@ -33,7 +33,7 @@ public class Command {
             error = true;
         }
         if (!objects.contains(noun)) {
-            msg += (noun + " is not a known noun!");
+            msg += (noun + " is not here");
             error = true;
         }
         if (!error) {
@@ -89,7 +89,9 @@ public class Command {
                 case "o":
                     AdventureGame.game.goO();
                     break;
-                case "l":
+                case "save":
+                    AdventureGame.game.saveGame();
+                    break;
                 case "fight":
                     AdventureGame.game.randomFight();
                     break;

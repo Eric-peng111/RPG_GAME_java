@@ -2,6 +2,9 @@ package gameobjects;
 
 import globals.Direction;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /** Represents the player in the game
  * @author Enze Peng
  */
@@ -21,6 +24,9 @@ public class Player extends Actor{
     /** Represents the bag containing items the player hold
      */
     public ItemContainer bag;
+
+    public String ds;
+
     /**
      * Class Constructor for Player
      * @author Enze Peng, Sijie Fan
@@ -46,6 +52,18 @@ public class Player extends Actor{
         this.wp=new WeaponContainer();
         wp.add(weapon);
     }
+    private Player(String aName, String aDescription, Room aRoom,int maxHp, int attack, int xp, int gold, int level, WeaponContainer wp,ItemContainer ic,String time) {
+        super(aName, aDescription, aRoom, maxHp, attack, level);
+        this.maxHp = maxHp;
+        this.hp = maxHp;
+        this.attack = attack;
+        this.xp = xp;
+        this.gold = gold;
+        this.level = level;
+        this.bag = ic;
+        this.wp=wp;
+        this.ds=time;
+    }
     /**
      * Method to get current gold of player
      * @author Sijie Fan
@@ -63,11 +81,16 @@ public class Player extends Actor{
     public static Player getInstance()
     {
         Weapons sword = new Weapons("self dagger", "one dagger one hero", 100, 250);
-        Room startRoom = new Room("town", "you have returned to town", 1, 2, 3, 4, 5, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT);
         if (single_instance == null)
-            single_instance = new Player("player","player in the game", startRoom,1100, 200 , 200, 1000, 1, sword);
+            single_instance = new Player("player","player in the game", null,1100, 200 , 200, 1000, 1, sword);
 
         return single_instance;
+    }
+
+    public static Player setPlayer(String aName, String aDescription, Room aRoom,int maxHp, int attack, int xp, int gold, int level, WeaponContainer wp,ItemContainer ic,String t){
+        single_instance=new Player(aName, aDescription, aRoom,maxHp, attack,xp, gold, level,wp,ic,t);
+        return single_instance;
+
     }
     /**
      * Method to generate attack damage of the player
@@ -189,6 +212,13 @@ public class Player extends Actor{
         s=s+"Name: "+this.getName()+"\nMax fight health: "+maxHp+"\nAttacking: "
                 +attack+"\nLevel: "+level+"\nExperience point: "+xp+"\nGold:"+gold;
         return s;
+    }
+
+    public void setDate(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        ds =formatter.format(date);
+
     }
 
 

@@ -27,6 +27,8 @@ public class Game {
     private Player player;  // the player - provides 'first person perspective'
     /** Represents all weapons in the game
      */
+
+    private DataInit DI;
     private static WeaponContainer G_Weapon=new WeaponContainer();
     /** Represents all items in the game
      */
@@ -53,11 +55,16 @@ public class Game {
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
         bs=new BattleSystem();
         ss = new ShopSystem();
-        player = Player.getInstance();
-        DataInit DI=new DataInit();
+        DI=new DataInit();
         G_item=DI.ic;
         G_Weapon= DI.wc;
+        player = DI.InitPlayer();
+        player.setLocation(map.get(0));
         objects=DI.objects;
+    }
+
+    public void saveGame(){
+        DI.save(getPlayer());
     }
 
 
