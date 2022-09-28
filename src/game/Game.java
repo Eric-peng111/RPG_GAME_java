@@ -318,7 +318,8 @@ public class Game {
                 "As you seek for the magician, you found out that he had hid himself in the DUNGEON OF DEATH.\n" +
                 "You enter a town and see 4 paths, facing north, east, south, west and the path into the Dungeon.\n" +
                 "Where do you wish to go?\n" +
-                "[n,e,s,w or d]\n";
+                "[n,e,s,w or d]\n" +
+                "enter 'help' for more instructions";
         System.out.println(s);
     }
     /**
@@ -470,6 +471,22 @@ public class Game {
         print(this.player.wp.describeWeapons());
     }
     /**
+     * Method to access help page
+     * @author Sijie Fan
+     */
+    public void help() {
+        print("Available commands: ");
+        print("take: take object\n" +
+                "drop: drop object from bag\n" +
+                "fight: fight with an enemy\n" +
+                "shop: access town shop\n" +
+                "bag: check bag\n" +
+                "profile: check profile\n" +
+                "map: check map\n" +
+                "save: save current game\n" +
+                "load: load game from history");
+    }
+    /**
      * Method to access the profile
      * @author Enze Peng
      */
@@ -485,7 +502,7 @@ public class Game {
         s =     "-------------------    ---------   Lava River (fire) N     ---------      -------------------\n"+
                 "-------------------    ---------            ||             ---------      -------------------\n"+
                 "-------------------    ---------            ||             ---------      -------------------\n"+
-                "  Forest (air) W       =========      Starting Room        =========        Cave (earth) E   \n"+
+                "  Forest (air) W       =========           Town            =========        Cave (earth) E   \n"+
                 "-------------------    ---------            ||             ---------      -------------------\n"+
                 "-------------------    ---------            ||             ---------      -------------------\n"+
                 "-------------------    ---------    Water Lake (water) S   ---------      -------------------\n"+
