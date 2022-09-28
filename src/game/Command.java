@@ -11,7 +11,7 @@ public class Command {
     /** Represents the list of available commands
      */
     static List<String> commands = new ArrayList<>(Arrays.asList(
-            "take", "drop", "look", "l", "i", "inventory","fight","shop","bag","profile","help","map",
+            "take", "drop","fight","shop","bag","profile","help","map",
             "n", "s", "w", "e","d","t","i","o",
             "save", "load"));
     /**
@@ -104,8 +104,8 @@ public class Command {
                 case "profile":
                     AdventureGame.game.showProfile();
                     break;
-                case "look":
-                    //AdventureGame.game.look();
+                case "help":
+                    AdventureGame.game.help();
                     break;
                 case "map":
                     AdventureGame.game.showMap();
