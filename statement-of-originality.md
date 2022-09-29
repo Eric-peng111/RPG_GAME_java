@@ -1,3 +1,4 @@
+---
 # for information on what this file is, see
 # https://comp.anu.edu.au/courses/comp2120/faq/#soo
 
@@ -20,4 +21,7 @@ member_declaration:
     name: 
     uid:
 
-# list numbered references below (replace the example with your own references)
+# list numbered references below (replace the example with your own references) 
+---
+# References
+- [1] Example Author. 2022. p5.js example code video. Retrieved from https://example.com/video
