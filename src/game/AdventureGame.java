@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 public class AdventureGame {
     /** Represents the game to be run
      */
-    static Game game;
+    public static Game game;
     /**
      * Main Method that runs the game
      * @author Enze Peng
