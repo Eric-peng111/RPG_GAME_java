@@ -1,4 +1,4 @@
-package test.java;
+package test.java.function;
 
 import gameobjects.Player;
 import org.junit.Test;
