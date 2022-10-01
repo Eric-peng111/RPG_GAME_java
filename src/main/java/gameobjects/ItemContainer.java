@@ -6,7 +6,6 @@ import java.util.ArrayList;
  */
 public class ItemContainer extends ArrayList<Item> {
 
-
     /**
      * Method to print out list of items in an ItemContainer
      * @author Enze Peng

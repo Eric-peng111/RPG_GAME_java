@@ -1,6 +1,7 @@
 package globals;
 /** Represents directions the player can go
  * @author Nha Ngo
+ * @author Huw Collingbourne (from external resource)
  */
 
 public enum Direction {

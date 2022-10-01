@@ -35,9 +35,9 @@ public class DataInit {
      * @author Enze Peng
      */
     DataInit(){
-        init_t();
-        init_w();
-        getObjects();
+        init_t();//init item container
+        init_w();// init weapon container
+        getObjects();// get all name of items and weapons
         scan= new Scanner(System.in);
     }
     /** Represents filepath to be used when reading and storing data
@@ -54,15 +54,19 @@ public class DataInit {
 
         JSONParser parser = new JSONParser();
         try {
-
+            // setup object from items in items.json
             Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/main/java/game/Json/items.json"));
             JSONObject jsonObject = (JSONObject) obj;
-            JSONArray em= (JSONArray) jsonObject.get("items");
+            JSONArray em= (JSONArray) jsonObject.get("items");//items contains multiple objects
+            // which needs Json_array to iterate
             Iterator itr=em.iterator();
             while(itr.hasNext()){
+                //get each item from json_array
                 JSONObject e=(JSONObject)itr.next();
                 int price=Integer.parseInt(e.get("price").toString());
                 int impact=Integer.parseInt( e.get("impact").toString());
+                //collect all info to create new object of item
+                // add to ic container
                 this.ic.add(new Item((String)e.get("name"),(String)e.get("description"),price,
                         impact,convert((String)e.get("type"))));
             }
@@ -85,14 +89,18 @@ public class DataInit {
 
         JSONParser parser = new JSONParser();
         try {
+            //get object of weapons from weapon.json
             Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/main/java/game/Json/weapon.json"));
             JSONObject jsonObject = (JSONObject) obj;
+            //object contains multiple weapons,needs json_array to collect all weapons
             JSONArray em= (JSONArray) jsonObject.get("Weapons");
             Iterator itr=em.iterator();
             while(itr.hasNext()){
+                //iterate all weapons
                 JSONObject e=(JSONObject)itr.next();
                 int price=Integer.parseInt(e.get("price").toString());
                 int attack=Integer.parseInt(e.get("attack").toString());
+                //collect all weapons info and attributes
                 this.wc.add(new Weapons((String)e.get("name"),(String)e.get("description"),price,attack));
             }
 
@@ -109,6 +117,7 @@ public class DataInit {
      */
     public void getObjects(){
         this.objects=new ArrayList<>();
+        //iterate all weapons and items
         for(Weapons w:this.wc){
             objects.add(w.getName());
         }
@@ -123,6 +132,7 @@ public class DataInit {
      * @return - ItemType represented by the input String
      */
     private ItemType convert(String s){
+        //check string is heal or buff
         if(s.toLowerCase().equals("heal"))
             return ItemType.HEAL;
         else if (s.toLowerCase().equals("buff"))
@@ -131,9 +141,17 @@ public class DataInit {
             return null;
     }
 
+    /**
+     * method to load all players from player.json
+     * @author Enze Peng
+     * @param ic- an item container
+     *  @param wc- an weapon container
+     * @return - a collection of players
+     */
 
     private ArrayList<Player> load(ItemContainer ic,WeaponContainer wc){
         ArrayList<Player> p=new ArrayList<>();
+        //get object of weapons from player.json
         JSONParser parser = new JSONParser();
         try {
             Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/main/java/game/Json/player.json"));
@@ -141,6 +159,7 @@ public class DataInit {
             JSONArray em= (JSONArray) jsonObject.get("player");
             Iterator itr=em.iterator();
             while(itr.hasNext()){
+                //get all info and features of each player
                 JSONObject e=(JSONObject)itr.next();
                 int gold=Integer.parseInt(e.get("gold").toString());
                 int maxHp=Integer.parseInt(e.get("maxHp").toString());
@@ -149,8 +168,10 @@ public class DataInit {
                 int xp=Integer.parseInt(e.get("xp").toString());
                 WeaponContainer wt=new WeaponContainer();
                 ItemContainer it=new ItemContainer();
+                //create item and weapon containers for each player
                 List<String> i= (List<String>)e.get("item");
                 List<String> w= (List<String>)e.get("weapon");
+                //respectively add instances to item/weapon container
                 for(int k=0;k<i.size();k++){
                     for(Item t:ic){
                         if(t.getName().equals(i.get(k))){
@@ -165,6 +186,7 @@ public class DataInit {
                             wt.add(t);
                     }
                 }
+                //add all players from saved player to player collections in this class
 
                 p.add(Player.getInstance().setPlayer((String)e.get("name"),(String)e.get("description"),null,
                         maxHp,attack,xp,gold,level,wt,it,(String)e.get("time")));
@@ -180,7 +202,19 @@ public class DataInit {
 
     }
 
+    /**
+     * method to save the player to player.json
+     * @author Enze Peng
+     * @param P- the player from the currently played game
+     */
+
+
     public void save(Player P){
+        //since everytime save instance to file,
+        //it is needed to clear the file first and rewrite the json file
+        // so the approach here is to load the existing file to make player-collections
+        //then add up one more player from the current game to this collections
+        //then do the save manipulation
         ArrayList<Player> playerArrayList=load(ic,wc);
         P.setDate();
         playerArrayList.add(P);
@@ -237,7 +271,15 @@ public class DataInit {
 
     }
 
+    /**
+     * method to init the player to the game that is about to start
+     * @author Enze Peng
+     */
+
     public Player InitPlayer(){
+        //once a new game is created
+        //player needs to choose whether to use a saved player as before, or create a new one
+        //this functions will determine which player will be initialized by the use input
         print("-----Adventure is about to start-----"+"\nchoose action to setup player:"+"\n(1) load from save\n(2) new player \n\nplease enter a number");
 
         int input = readChoice(2);

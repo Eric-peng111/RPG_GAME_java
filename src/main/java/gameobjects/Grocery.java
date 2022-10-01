@@ -14,7 +14,7 @@ public class Grocery extends Thing{
      * @param pc - int for price of grocery
      */
     public Grocery(String aName, String aDescription, int pc) {
-        super(aName, aDescription);
+        super(aName, aDescription);//init superclass
         price = pc;
     }
     /**

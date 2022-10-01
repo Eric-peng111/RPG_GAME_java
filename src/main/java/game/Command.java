@@ -6,6 +6,7 @@ import java.util.List;
 
 /** Represents commands that the player can use
  * @author Enze Peng, Sijie Fan, Nha Ngo, Qiuyu Chen
+ * @author Huw Collingbourne (from external resource)
  */
 public class Command {
     /** Represents the list of available commands
@@ -24,6 +25,8 @@ public class Command {
      * @return - String representing the result of action
      */
     static String processVerbNoun(List<String> wordlist,List<String> objects) {
+        //the game is only allow two words commands
+        //
         String verb;
         String noun = "";
         String msg = "";
@@ -34,6 +37,7 @@ public class Command {
         else {
             noun = wordlist.get(1) + " " + wordlist.get(2);
         }
+        // check first word of commands if it contains two words
         if (!interactions.contains(verb)) {
             msg = verb + " is not a known verb! ";
             error = true;
@@ -60,6 +64,7 @@ public class Command {
     /**
      * Method to process general user commands
      * @author Nha Ngo, Enze Peng, Sijie Fan
+     * @author Huw Collingbourne (from external resource)
      * @param wordlist - list of strings representing the word to be processed
      * @return - String representing the result of action
      */
@@ -70,6 +75,7 @@ public class Command {
         if (!commands.contains(verb)) {
             msg = verb + " is not a known verb! ";
         } else {
+            // convert command into internal functions or sections to make action
             switch (verb) {
                 case "n":
                     AdventureGame.game.goN();
