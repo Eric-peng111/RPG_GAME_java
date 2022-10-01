@@ -136,7 +136,7 @@ public class DataInit {
         ArrayList<Player> p=new ArrayList<>();
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/game/Json/player.json"));
+            Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/main/java/game/Json/player.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray em= (JSONArray) jsonObject.get("player");
             Iterator itr=em.iterator();
