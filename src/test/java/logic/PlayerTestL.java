@@ -1,4 +1,4 @@
-package test.java.logic;
+package logic;
 
 import game.AdventureGame;
 import game.Game;

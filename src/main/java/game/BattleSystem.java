@@ -73,6 +73,8 @@ public class BattleSystem implements java.io.Serializable{
                 player.gold=++e.goldReward;
                 print("you have gained "+e.expReward+ " gold from this battle, you have "+player.gold+" gold now.");
                 player.checkUpgrade();
+                print("you have gained the weapon "+e.treasure.getName()+" !");
+                player.wp.add(e.treasure);
                 break;
             }
             i++;

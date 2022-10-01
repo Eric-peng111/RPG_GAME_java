@@ -1,4 +1,4 @@
-package test.java.function;
+package function;
 
 import gameobjects.Room;
 import globals.Direction;

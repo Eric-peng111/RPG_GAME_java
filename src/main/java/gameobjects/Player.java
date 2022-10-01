@@ -1,14 +1,12 @@
 package gameobjects;
 
-import globals.Direction;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /** Represents the player in the game
  * @author Enze Peng
  */
-public class Player extends Actor{
+public class Player extends Character {
     /** Singleton instance of player
      */
     private static Player single_instance = null;

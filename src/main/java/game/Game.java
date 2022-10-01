@@ -5,6 +5,7 @@ import java.util.*;     // required for ArrayList
 import java.util.List;
 
 import gameobjects.*;
+import gameobjects.Character;
 import globals.Direction;
 import gameobjects.Player;
 import gameobjects.Enemy;
@@ -21,18 +22,22 @@ public class Game {
     private ShopSystem ss;
     /** Represents the map of the game
      */
-    private ArrayList <Room>map; // the map - an ArrayList of Rooms
+    private ArrayList <Room> map; // the map - an ArrayList of Rooms
     /** Represents the player in the game
      */
     private Player player;  // the player - provides 'first person perspective'
+    /** Data reader and saver
+     */
+    private DataInit DI;
     /** Represents all weapons in the game
      */
-
-    private DataInit DI;
     private static WeaponContainer G_Weapon=new WeaponContainer();
     /** Represents all items in the game
      */
     private static ItemContainer G_item=new ItemContainer();
+    /** Represents all available treasures from enemies in the game
+     */
+    private static final WeaponContainer treasures = new WeaponContainer();
     /** Represents all Strings of objects in the game
      */
     ArrayList<String> objects;
@@ -54,6 +59,16 @@ public class Game {
         map.add(new Room("the arena of the Dungeon", "As you found a small hidden door, you entered an Arena covered in blood, before you stands the evil magician VOID.\n"
                 + "Duel with VOID [duel] "+ "Leave the Arena [o]", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT,Direction.NOEXIT,5));
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
+        treasures.add(new Weapons("Giant Stick", "a huge stick, acquired after defeating a giant", 250, 300));
+        treasures.add(new Weapons("Goblin bar", "a small wooden bar, acquired after defeating a goblin", 100, 150));
+        treasures.add(new Weapons("Wolf Claws", "sharp, shining claws with blood on them, acquired after defeating a wolf", 300, 375));
+        treasures.add(new Weapons("Silver Cross", "a sacred silver cross, acquired after defeating a vampire", 250, 280));
+        treasures.add(new Weapons("Venomous Tooth", "a purple tooth stained with poison, acquired after defeating a snake", 300, 350));
+        treasures.add(new Weapons("Evil book", "a closed book, written in a language you don`t understand, acquired after defeating a vampire", 400, 400));
+        treasures.add(new Weapons("Scorpion Sting", "a crystal sting of venom, acquired after defeating a scorpion", 200, 200));
+        treasures.add(new Weapons("Slime liquid", "some thick and gluey liquid, acquired after defeating a slime", 50, 50));
+
+
         bs=new BattleSystem();
         ss = new ShopSystem();
         DI=new DataInit();
@@ -103,27 +118,27 @@ public class Game {
      * @author Nha Ngo
      * @param aRoom  - Room to be moved to
      */
-    private void moveActorTo(Actor p, Room aRoom) {
+    private void moveActorTo(Character p, Room aRoom) {
 
         p.setLocation(aRoom);
         aRoom.randomInit(G_item,G_Weapon);
     }
 
-    // move an Actor in direction 'dir'
+    // move an Character in direction 'dir'
     /**
      * Method to move the player to another room
      * @author Nha Ngo
-     * @param anActor  - Character to be moved
+     * @param anCharacter  - Character to be moved
      * @param dir - Direction the be moved
      * @return - int representing the room number moved to
      */
-    private int moveTo(Actor anActor, Direction dir) {
+    private int moveTo(Character anCharacter, Direction dir) {
         // return: Constant representing the room number moved to
         // or NOEXIT
         //
         // try to move any Person (typically but not necessarily player)
         // in direction indicated by dir
-        Room r = anActor.getLocation();
+        Room r = anCharacter.getLocation();
         int exit;
 
         switch (dir) {
@@ -156,7 +171,7 @@ public class Game {
                 break;
         }
         if (exit != Direction.NOEXIT) {
-            moveActorTo(anActor, map.get(exit));
+            moveActorTo(anCharacter, map.get(exit));
         }
         return exit;
     }
@@ -300,7 +315,10 @@ public class Game {
         else {
         print("----------Fight---------------");
         print("you encountered an enemy. Time to fight");
-        bs.battle(new Enemy((int)(Math.random()*5), getPlayer().level, getPlayer().maxHp),getPlayer());}
+        int i = (int)(Math.random()*8);
+        Enemy rnd = new Enemy(i, getPlayer().level, getPlayer().maxHp);
+        rnd.treasure = treasures.get(i);
+        bs.battle(rnd,getPlayer());}
     }
     /**
      * Method to print out intro message of the game
@@ -513,8 +531,16 @@ public class Game {
      * @author Sijie Fan
      */
     public void duel() {
+        if (!player.getLocation().getName().equals("arena of the Dungeon")){
+            print("You must first find VOID to duel with him");
+            return;
+        }
+        else if (player.level < 10){
+            print("Your level is too low for this place.");
+            return;
+        }
         print("VOID stands up and slowly starts walking towards you");
-        Grocery voidStaff = new Weapons("Staff of VOID", "The most powerful, yet also the most evil weapon in the world", 1000, 500);
+        Weapons voidStaff = new Weapons("Staff of VOID", "The most powerful, yet also the most evil weapon in the world", 1000, 500);
         Enemy vid = new Enemy("VOID", "The Evil Magician", map.get(6), 5000, 500, 10, 1000, 100, voidStaff);
         bs.battle(vid, player);
     }
