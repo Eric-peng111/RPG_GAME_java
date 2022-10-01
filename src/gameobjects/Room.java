@@ -140,18 +140,18 @@ public class Room extends Thing {
      */
     public void randomInit(ItemContainer IC,WeaponContainer WC){
         this.gc.clear();
-        int i=(int)(Math.random()*IC.size());
-        int w=(int)(Math.random()*WC.size());
+        int i=(int)(Math.random()*4);
+        int w=(int)(Math.random()*4);
         ItemContainer ic=(ItemContainer) IC.clone();
         WeaponContainer wc=(WeaponContainer) WC.clone();
         for(int j=0;j<i;j++){
-            int t=(int)Math.random()*ic.size();
+            int t=(int)(Math.random()*ic.size());
             this.gc.add(ic.get(t));
             ic.remove(t);
         }
 
         for(int j=0;j<w;j++){
-            int t=(int)Math.random()*wc.size();
+            int t=(int)(Math.random()*wc.size());
             this.gc.add(wc.get(t));
             wc.remove(t);
         }
@@ -179,7 +179,7 @@ public class Room extends Thing {
         roomdesc = String.format("%s. %s.", getName(), getDescription());
         thingsdesc = getThings().describeThings();
         if (!thingsdesc.isEmpty()) {
-            roomdesc += "\nThings here:\n" + thingsdesc;
+            roomdesc += "\nYou glance at the ground, and you see the following objects: \n" + thingsdesc + "(enter name to claim)";
         }
         return roomdesc+"\n\nif u wanna go deeper to find more adventures，type fight";
     }

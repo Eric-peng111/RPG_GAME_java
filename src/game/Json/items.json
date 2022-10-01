@@ -3,7 +3,7 @@
   "items": [
     {
       "name": "grass",
-      "description": "grass",
+      "description": "a small pile of grass, seems eatable",
       "type": "heal",
       "impact": 30,
       "price": 50
@@ -11,17 +11,80 @@
     },
     {
       "name": "blood",
-      "description": "blood",
+      "description": "some animal blood, shines in dark color under the sun",
       "type": "heal",
       "impact": 50,
       "price": 80
     },
     {
-      "name": "drug",
-      "description": "drug get u excited",
+      "name": "power potion",
+      "description": "a bottle of potion shining dark green, with the caption 'power' ",
       "type": "buff",
       "impact": 100,
       "price": 100
+    },
+    {
+      "name": "heal potion",
+      "description": "a bottle of potion shining pure gold, with the caption 'heal' ",
+      "type": "heal",
+      "impact": 200,
+      "price": 100
+    },
+    {
+      "name": "fire stone",
+      "description": "a fire stone wrapped with paper, use to enhance your attacks with fire",
+      "type": "buff",
+      "impact": 80,
+      "price": 80
+    },
+    {
+      "name": "snake poison",
+      "description": "a bottle of thick, purple liquid, extracted from deadly snakes",
+      "type": "buff",
+      "impact": 150,
+      "price": 200
+    },
+    {
+      "name": "blueberry",
+      "description": "some regular blueberries, looking juicy",
+      "type": "heal",
+      "impact": 50,
+      "price": 20
+    },
+    {
+      "name": "apple",
+      "description": "a fresh, red apple",
+      "type": "heal",
+      "impact": 60,
+      "price": 30
+    },
+    {
+      "name": "honey",
+      "description": "a bottle of golden, shining honey",
+      "type": "heal",
+      "impact": 80,
+      "price": 80
+    },
+    {
+      "name": "battle book",
+      "description": "a book with the cover 'Battle Guide', might be able to increase your battle skills",
+      "type": "buff",
+      "impact": 120,
+      "price": 120
+    },
+    {
+      "name": "sacred water",
+      "description": "spring water blessed by the sacred goddess, has incredible healing power",
+      "type": "heal",
+      "impact": 500,
+      "price": 300
+    },
+    {
+      "name": "dragon`s heart",
+      "description": "the heart of a dragon, can grant one with courage beyond boundary",
+      "type": "buff",
+      "impact": 300,
+      "price": 1000
     }
   ]
 }

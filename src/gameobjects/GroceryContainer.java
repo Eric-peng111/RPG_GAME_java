@@ -1,6 +1,8 @@
 package gameobjects;
 
 import java.util.ArrayList;
+import java.util.List;
+
 /** Represents an arraylist of groceries
  * @author Sijie Fan
  */
@@ -31,12 +33,16 @@ public class GroceryContainer extends ArrayList<Grocery>  {
     }
 
 
-
+    /**
+     * Method to print out list of items in a room
+     * @author Sijie Fan
+     * @return - String describing all groceries in a shop
+     */
     public String describeThings() {
         String s = "";
 
         if (this.size() == 0) {
-            s = "Unfortunately, nothing here";
+            s = "Unfortunately, nothing is here";
         } else {
             for (Grocery t : this) {
                 s = s + t.getName() + ": " + t.getDescription() + "\n";
@@ -44,5 +50,16 @@ public class GroceryContainer extends ArrayList<Grocery>  {
         }
         return s;
     }
-
+    /**
+     * Method to print out names of a grocery list
+     * @author Sijie Fan
+     * @return - String describing all groceries in a shop
+     */
+    public List<String> toList() {
+        List<String> rtn = new ArrayList<>();
+        for (Grocery gc : this){
+            rtn.add(gc.getName());
+        }
+        return rtn;
+    }
 }

@@ -11,9 +11,11 @@ public class Command {
     /** Represents the list of available commands
      */
     static List<String> commands = new ArrayList<>(Arrays.asList(
-            "take", "drop","fight","shop","bag","profile","help","map",
+            "fight","duel","shop","bag","profile","help","map",
             "n", "s", "w", "e","d","t","i","o",
             "save", "load"));
+    static List<String> interactions = new ArrayList<>(Arrays.asList(
+            "take", "drop"));
     /**
      * Method to process dropping or taking an object
      * @author Qiuyu Chen
@@ -23,12 +25,16 @@ public class Command {
      */
     static String processVerbNoun(List<String> wordlist,List<String> objects) {
         String verb;
-        String noun;
+        String noun = "";
         String msg = "";
         boolean error = false;
         verb = wordlist.get(0);
-        noun = wordlist.get(1);
-        if (!commands.contains(verb)) {
+        if (wordlist.size() == 2)
+            noun = wordlist.get(1);
+        else {
+            noun = wordlist.get(1) + " " + wordlist.get(2);
+        }
+        if (!interactions.contains(verb)) {
             msg = verb + " is not a known verb! ";
             error = true;
         }
@@ -94,6 +100,9 @@ public class Command {
                     break;
                 case "fight":
                     AdventureGame.game.randomFight();
+                    break;
+                case "duel":
+                    AdventureGame.game.duel();
                     break;
                 case "shop":
                     AdventureGame.game.accessShop();
