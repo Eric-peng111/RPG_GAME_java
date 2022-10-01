@@ -467,7 +467,7 @@ public class Game {
             print("Hello, what would you like to buy today?");
             print(shopList.describeShop());
             print("(enter weapon number to purchase, or enter 0 to leave the shop.)");
-            print("Your balance: "+player.getGold());
+            print("Your balance: "+player.gold);
             ss.buyItem(shopList);
         }
         else{
@@ -534,12 +534,13 @@ public class Game {
      * @author Sijie Fan
      */
     public void duel() {
-        if (!player.getLocation().getName().equals("arena of the Dungeon")){
+        if (!player.getLocation().getName().equals("the arena of the Dungeon")){
             print("You must first find VOID to duel with him");
             return;
         }
-        else if (player.level < 10){
-            print("Your level is too low for this place.");
+        else if (player.level < 5){
+            print("Your are too weak to fight with the VOID, reach level 5 and come back!");
+            print("enter [o] to exit");
             return;
         }
         print("VOID stands up and slowly starts walking towards you");
