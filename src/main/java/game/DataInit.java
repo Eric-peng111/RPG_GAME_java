@@ -55,7 +55,7 @@ public class DataInit {
         JSONParser parser = new JSONParser();
         try {
 
-            Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/game/Json/items.json"));
+            Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/main/java/game/Json/items.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray em= (JSONArray) jsonObject.get("items");
             Iterator itr=em.iterator();
@@ -85,7 +85,7 @@ public class DataInit {
 
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/game/Json/weapon.json"));
+            Object obj = parser.parse(new FileReader(path.toAbsolutePath()+"/main/java/game/Json/weapon.json"));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray em= (JSONArray) jsonObject.get("Weapons");
             Iterator itr=em.iterator();
