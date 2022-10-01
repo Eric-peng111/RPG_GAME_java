@@ -50,6 +50,8 @@ public class Enemy extends Character {
     public Enemy(int i,int level,int playHP){
 
         super(enemies[i], "The "+enemies[i]+" is coming", null, 0, 0,level);
+        //due to player will be in different stage
+        //so the enemy attributes such as attacking value will be setup based on player attributes
         this.attack=200*level/2;
         this.maxHp=3*playHP/2;
         this.hp =3*playHP/2;
@@ -63,6 +65,6 @@ public class Enemy extends Character {
      */
     public int attack(){
         return (int) (Math.random()*10+this.attack);
-    }
+    }//attack value will be setup in a range randomly
 
 }

@@ -2,6 +2,7 @@ package gameobjects;
 
 /** Represents a room in the game
  * @author Enze Peng
+ * @author Huw Collingbourne (from external resource)
  */
 public class Room extends Thing {
     /** Represents room number in the north of this room
@@ -139,6 +140,8 @@ public class Room extends Thing {
      * @param WC - WeaponContainer representing weapons to be added to the room
      */
     public void randomInit(ItemContainer IC,WeaponContainer WC){
+        //every time enter a new room, grocery container of this room will be reset by this random function
+        // it will generate random num of random items/weapons from the repository
         this.gc.clear();
         int i=(int)(Math.random()*4);
         int w=(int)(Math.random()*4);

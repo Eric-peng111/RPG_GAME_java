@@ -12,12 +12,13 @@ public class AdventureGame {
     /**
      * Main Method that runs the game
      * @author Enze Peng
+     * @author Huw Collingbourne (from external game engine)
      */
     public static void main(String[] args) throws IOException {
         BufferedReader in;
         String input;
         String output;
-        game = new Game();
+        game = new Game();//create a new game and initialize it
         in = new BufferedReader(new InputStreamReader(System.in));
         game.showIntro();
         do {
@@ -25,7 +26,7 @@ public class AdventureGame {
             input = in.readLine();
             output = game.runCommand(input);
             System.out.println(output);
-        } while (!"q".equals(input));
+        } while (!"q".equals(input));//game won't end until player enter 'p'
     }
 
 }
