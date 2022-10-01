@@ -51,7 +51,8 @@ public class Game {
         map.add(new Room("the Forest", " A field of trees surrounds you, in the distance is an orb of air floating. ", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
         map.add(new Room("the Cave", " As you go deeper, you enter a great opening surrounded by wall of rocks covered in moss, you see an orb of earth in the wall. ", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT));
         map.add(new Room("the DUNGEON OF DEATH", " A massive metal door stand before you. In the door, there are 4 elemental locks for air, water, earth and fire.\n" + "Return to town [t] or Enter in [i]" , Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,0,6,Direction.NOEXIT));
-        map.add(new Room("the arena of the Dungeon", "An Arena covered in blood, before you stands the evil magician VOID.\n" + "Leave the Arena [o]", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT,Direction.NOEXIT,5));
+        map.add(new Room("the arena of the Dungeon", "As you found a small hidden door, you entered an Arena covered in blood, before you stands the evil magician VOID.\n"
+                + "Duel with VOID [duel] "+ "Leave the Arena [o]", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT,Direction.NOEXIT,Direction.NOEXIT,5));
         // create player and place in Room 0 (i.e. the Room at 0 index of map)
         bs=new BattleSystem();
         ss = new ShopSystem();
@@ -171,7 +172,16 @@ public class Game {
 
         if (t == Direction.NOEXIT) {
             print("No Exit!");
-        } else {
+        }
+        else if (t == 0){
+            print("You are in the town. A quiet town, with 4 paths and road to the Dungeon\n" +
+                    "Where do you wish to go?\n" +
+                    "[n,e,s,w or d]");
+        }
+        else if (t == 6){
+            print(player.getLocation().getDescription());
+        }
+        else {
             showDetails();
         }
         return t;
@@ -196,74 +206,56 @@ public class Game {
      * @author Enze Peng
      */
     void goN() {
-        updateOutput(movePlayerTo(Direction.NORTH));
+        movePlayerTo(Direction.NORTH);
     }
     /**
      * Method for player moving south
      * @author Enze Peng
      */
     void goS() {
-        updateOutput(movePlayerTo(Direction.SOUTH));
+        movePlayerTo(Direction.SOUTH);
     }
     /**
      * Method for player moving west
      * @author Enze Peng
      */
     void goW() {
-        updateOutput(movePlayerTo(Direction.WEST));
+        movePlayerTo(Direction.WEST);
     }
     /**
      * Method for player moving east
      * @author Enze Peng
      */
     void goE() {
-        updateOutput(movePlayerTo(Direction.EAST));
+        movePlayerTo(Direction.EAST);
     }
     /**
      * Method for player moving down
      * @author Enze Peng
      */
     void goD() {
-        updateOutput(movePlayerTo(Direction.DUNGEON));
+        movePlayerTo(Direction.DUNGEON);
     }
     /**
      * Method for player moving to town
      * @author Enze Peng
      */
     void goT() {
-        updateOutput(movePlayerTo(Direction.TOWN));
+        movePlayerTo(Direction.TOWN);
     }
     /**
      * Method for player moving inside
      * @author Enze Peng
      */
     void goI() {
-        updateOutput(movePlayerTo(Direction.IN));
+        movePlayerTo(Direction.IN);
     }
     /**
      * Method for player moving outside
      * @author Enze Peng
      */
     void goO() {
-        updateOutput(movePlayerTo(Direction.OUT));
-    }
-    /**
-     * Method to update the player`s location
-     * @author Enze Peng
-     * @param roomNumber - int representing room number the player arrived at
-     */
-    private void updateOutput(int roomNumber) {
-        // if roomNumber = NOEXIT, display a special message, otherwise
-        // display text (e.g. name and description of room)
-        String s;
-        if (roomNumber == Direction.NOEXIT) {
-            s = "No Exit!";
-        } else {
-            Room r = getPlayer().getLocation();
-            s = "You arrived at "
-                    + r.getName() + ". " + r.getDescription();
-        }
-        //System.out.println(s);
+        movePlayerTo(Direction.OUT);
     }
     /**
      * Method for processing a single command
@@ -275,10 +267,8 @@ public class Game {
         String msg;
         if (wordlist.size() == 1) {
             msg = Command.processVerb(wordlist);
-        } else if (wordlist.size() == 2) {
-            msg = Command.processVerbNoun(wordlist,objects);
         } else {
-            msg = "please input 2 word commands !";
+            msg = Command.processVerbNoun(wordlist,player.getLocation().getThings().toList());
         }
         return msg;
     }
@@ -303,10 +293,14 @@ public class Game {
      * @author Enze Peng
      */
     public  void randomFight() {
+        String l = player.getLocation().getName();
+        if (l.equals("town") || l.equals("the arena of the Dungeon")){
+            print("You can not start a fight in this area");
+        }
+        else {
         print("----------Fight---------------");
         print("you encountered an enemy. Time to fight");
-        bs.battle(new Enemy((int)(Math.random()*5), getPlayer().level, getPlayer().maxHp),getPlayer());
-
+        bs.battle(new Enemy((int)(Math.random()*5), getPlayer().level, getPlayer().maxHp),getPlayer());}
     }
     /**
      * Method to print out intro message of the game
@@ -381,7 +375,7 @@ public class Game {
         return null;
     }
     /**
-     * Method to find an item in the weapon list
+     * Method to find an item in the item list
      * @author Enze Peng
      * @param s - String representing name of the item to be found
      * @return - Weapons representing the item found
@@ -514,5 +508,15 @@ public class Game {
                 "\n"+
                 "You are now in "+ player.getLocation().getName();
         System.out.println(s);}
+    /**
+     * Method to duel with VOID
+     * @author Sijie Fan
+     */
+    public void duel() {
+        print("VOID stands up and slowly starts walking towards you");
+        Grocery voidStaff = new Weapons("Staff of VOID", "The most powerful, yet also the most evil weapon in the world", 1000, 500);
+        Enemy vid = new Enemy("VOID", "The Evil Magician", map.get(6), 5000, 500, 10, 1000, 100, voidStaff);
+        bs.battle(vid, player);
+    }
 }
 

@@ -3,25 +3,25 @@
   "Weapons": [
     {
       "name": "sword",
-      "description": "sword",
+      "description": "a long sword, one that seem to be the most common weapon in the world",
       "attack": 100,
       "price": 100
     },
     {
       "name": "bow",
-      "description": "An accurate bow",
+      "description": "a simple yet accurate bow",
       "attack": 150,
       "price": 150
     },
     {
       "name": "staff",
-      "description": "A staff filled with power",
+      "description": "A staff filled with power, you can feel the magic flowing just by glaring at it",
       "attack": 200,
       "price": 200
     },
     {
       "name": "dagger",
-      "description": "A small dagger",
+      "description": "A small dagger, very easy to carry around",
       "attack": 50,
       "price": 50
     },
@@ -30,6 +30,54 @@
       "description":"one dagger one hero",
       "attack":250,
       "price":100
+    },
+    {
+      "name":"dragon tooth",
+      "description":"a long tooth in pure white, suggesting the possible existence of dragons around",
+      "attack":200,
+      "price":500
+    },
+    {
+      "name":"hammer",
+      "description":"a heavy hammer, you can barely hold it in your hand",
+      "attack":150,
+      "price":100
+    },
+    {
+      "name":"wooden stick",
+      "description":"a normal wooden stick, not very powerful, but might be enough for fighting small animals ",
+      "attack":30,
+      "price":10
+    },
+    {
+      "name":"fire staff",
+      "description":"a staff with the tip of burning fire, good for casting fire magic",
+      "attack":150,
+      "price":200
+    },
+    {
+      "name":"ice staff",
+      "description":"a staff with the tip of froze ice, good for casting ice magic",
+      "attack":150,
+      "price":200
+    },
+    {
+      "name":"diamond sword",
+      "description":"a sword made with pure diamond, not much stronger than a regular one, but much more expensive",
+      "attack":150,
+      "price":1000
+    },
+    {
+      "name":"broken sword",
+      "description":"a broken sword, barely usable",
+      "attack":50,
+      "price":10
+    },
+    {
+      "name":"legendary sword",
+      "description":"the weapon that is said to be once owned by the great hero",
+      "attack":500,
+      "price":1000
     }
   ]
 }
