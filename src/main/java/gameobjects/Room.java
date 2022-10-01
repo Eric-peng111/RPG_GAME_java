@@ -1,7 +1,8 @@
 package gameobjects;
 
 /** Represents a room in the game
- * @author Enze Peng
+ * @author Enze Peng, Nha Ngo
+ * @author Huw Collingbourne (from external resource)
  */
 public class Room extends Thing {
     /** Represents room number in the north of this room
@@ -33,7 +34,7 @@ public class Room extends Thing {
     private GroceryContainer gc;
     /**
      * Class Constructor for Room
-     * @author Enze Peng
+     * @author Enze Peng, Nha Ngo
      * @param aName - String for name of room
      * @param aDescription - String for description of room
      * @param aN - int for room number in the north of this room
@@ -61,7 +62,7 @@ public class Room extends Thing {
 
     /**
      * Method to get room number in the north of this room
-     * @author Enze Peng
+     * @author Enze Peng Nha Ngo
      * @return - int representing index of the room in the north of this room
      */
     public int getN() {
@@ -77,7 +78,7 @@ public class Room extends Thing {
     }
     /**
      * Method to set room number in the south of this room
-     * @author Enze Peng
+     * @author Enze Peng Nha Ngo
      * @param aS - int representing index of the room in the south of this room
      */
     public void setS(int aS) {
@@ -85,7 +86,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number in the east of this room
-     * @author Enze Peng
+     * @author Enze Peng Nha Ngo
      * @return - int representing index of the room in the east of this room
      */
     public int getE() {
@@ -93,7 +94,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number in the west of this room
-     * @author Enze Peng
+     * @author Enze Peng Nha Ngo
      * @return - int representing index of the room in the west of this room
      */
     public int getW() {
@@ -101,7 +102,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number down of this room
-     * @author Enze Peng
+     * @author Enze Peng, Nha Ngo
      * @return - int representing index of the room down of this room
      */
     public int getD() {
@@ -109,7 +110,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number in the town direction of this room
-     * @author Enze Peng
+     * @author Enze Peng, Nha Ngo
      * @return - int representing index of the room in the town direction of this room
      */
     public int getT() {
@@ -117,7 +118,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number in the inside of this room
-     * @author Enze Peng
+     * @author Enze Peng, Nha Ngo
      * @return - int representing index of the room in the inside of this room
      */
     public int getI() {
@@ -125,7 +126,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number in the outside of this room
-     * @author Enze Peng
+     * @author Enze Peng, Nha Ngo
      * @return - int representing index of the room in the outside of this room
      */
     public int getO() {
