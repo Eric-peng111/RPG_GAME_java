@@ -2,10 +2,10 @@ package gameobjects;
 /** Represents an enemy in the game
  * @author Enze Peng
  */
-public class Enemy extends Actor{
+public class Enemy extends Character {
     /** Represents all potential enemies
      */
-    public static String[] enemies = {"Giant", "Goblin", "Wolf", "vampire", "Snake"};
+    public static String[] enemies = {"Giant", "Goblin", "Wolf", "vampire", "Snake", "Demon", "Scorpion", "Slime"};
     /** Represents all potential boss enemies
      */
     public static String[] boss;
@@ -17,7 +17,7 @@ public class Enemy extends Actor{
     public int expReward;
     /** Represents Reward of defeating an enemy
      */
-    Grocery treasure;
+    public Weapons treasure;
     /**
      * Class Constructor for enemy
      * @author Enze Peng
@@ -29,10 +29,10 @@ public class Enemy extends Actor{
      * @param level - int for starting level of player
      * @param goldRwd - int for gold reward of an enemy
      * @param expRwd - int for exp reward of an enemy
-     * @param drop - Grocery for the reward dropped
+     * @param drop - Weapons for the reward dropped
      */
     public Enemy(String aName, String aDescription, Room aRoom, int maxHp,
-                 int attack, int level, int goldRwd, int expRwd, Grocery drop) {
+                 int attack, int level, int goldRwd, int expRwd, Weapons drop) {
         super(aName, aDescription, aRoom, maxHp, attack, level);
         this.hp = maxHp;
         this.goldReward = goldRwd;

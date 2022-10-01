@@ -118,8 +118,6 @@ public class Command {
                     break;
                 case "map":
                     AdventureGame.game.showMap();
-                case "inventory":
-                    break;
                 default:
                     msg = verb + " (not yet implemented)";
                     break;

@@ -6,9 +6,9 @@
 
 package gameobjects;
 /** Represents all characters in the game
- * @author Nha Ngo
+ * @author Enze Peng
  */
-public class Actor {
+public class Character {
     /** Represents name of character
      */
     private final String name;
@@ -40,7 +40,7 @@ public class Actor {
      * @param attack - int for base attack of character
      * @param level - int for level of character
      */
-    public Actor(String aName, String aDescription, Room aRoom, int maxHp, int attack, int level) {
+    public Character(String aName, String aDescription, Room aRoom, int maxHp, int attack, int level) {
         this.name = aName;
         this.description = aDescription;
         this.location = aRoom;

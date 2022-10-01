@@ -4,7 +4,7 @@
     {
       "name": "sword",
       "description": "a long sword, one that seem to be the most common weapon in the world",
-      "attack": 100,
+      "attack": 250,
       "price": 100
     },
     {
@@ -34,7 +34,7 @@
     {
       "name":"dragon tooth",
       "description":"a long tooth in pure white, suggesting the possible existence of dragons around",
-      "attack":200,
+      "attack":275,
       "price":500
     },
     {
@@ -52,19 +52,19 @@
     {
       "name":"fire staff",
       "description":"a staff with the tip of burning fire, good for casting fire magic",
-      "attack":150,
+      "attack":300,
       "price":200
     },
     {
       "name":"ice staff",
       "description":"a staff with the tip of froze ice, good for casting ice magic",
-      "attack":150,
+      "attack":300,
       "price":200
     },
     {
       "name":"diamond sword",
       "description":"a sword made with pure diamond, not much stronger than a regular one, but much more expensive",
-      "attack":150,
+      "attack":300,
       "price":1000
     },
     {
