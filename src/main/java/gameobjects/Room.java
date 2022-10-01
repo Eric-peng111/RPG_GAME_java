@@ -2,6 +2,7 @@ package gameobjects;
 
 /** Represents a room in the game
  * @author Enze Peng, Nha Ngo
+ * @author Huw Collingbourne (from external resource)
  */
 public class Room extends Thing {
     /** Represents room number in the north of this room
@@ -61,7 +62,7 @@ public class Room extends Thing {
 
     /**
      * Method to get room number in the north of this room
-     * @author Enze Peng, Nha Ngo
+     * @author Enze Peng Nha Ngo
      * @return - int representing index of the room in the north of this room
      */
     public int getN() {
@@ -69,7 +70,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number in the south of this room
-     * @author Enze Peng, Nha Ngo
+     * @author Enze Peng
      * @return - int representing index of the room in the south of this room
      */
     public int getS() {
@@ -77,7 +78,7 @@ public class Room extends Thing {
     }
     /**
      * Method to set room number in the south of this room
-     * @author Enze Peng, Nha Ngo
+     * @author Enze Peng Nha Ngo
      * @param aS - int representing index of the room in the south of this room
      */
     public void setS(int aS) {
@@ -85,7 +86,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number in the east of this room
-     * @author Enze Peng, Nha Ngo
+     * @author Enze Peng Nha Ngo
      * @return - int representing index of the room in the east of this room
      */
     public int getE() {
@@ -93,7 +94,7 @@ public class Room extends Thing {
     }
     /**
      * Method to get room number in the west of this room
-     * @author Enze Peng, Nha Ngo
+     * @author Enze Peng Nha Ngo
      * @return - int representing index of the room in the west of this room
      */
     public int getW() {

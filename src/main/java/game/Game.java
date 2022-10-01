@@ -12,6 +12,7 @@ import gameobjects.Enemy;
 import gameobjects.Room;
 /** Represents a single game
  * @author Enze Peng, Sijie Fan, Nha Ngo, Qiuyu Chen
+ * @author Huw Collingbourne (from external resource)
  */
 public class Game {
     /** BattleSystem in the game
@@ -44,6 +45,7 @@ public class Game {
     /**
      * Class Constructor for Game
      * @author Nha Ngo, EnzePeng, Sijie Fan
+     * @author Huw Collingbourne (from external resource)
      */
     public Game() {
         map = new ArrayList<Room>();
@@ -487,6 +489,7 @@ public class Game {
      * @author Sijie Fan
      */
     public void help() {
+        //print all instructions
         print("Available commands: ");
         print("take: take object\n" +
                 "drop: drop object from bag\n" +
@@ -524,7 +527,7 @@ public class Game {
                 "\n"+
                 "_____________________________________________________________________________________________\n"+
                 "\n"+
-                "You are now in "+ player.getLocation().getName();
+                "You are now in "+ player.getLocation().getName();//get the current location of the player
         System.out.println(s);}
     /**
      * Method to duel with VOID

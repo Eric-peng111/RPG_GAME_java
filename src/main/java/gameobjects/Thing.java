@@ -7,6 +7,7 @@
 package gameobjects;
 /** Represents all objects in the game
  * @author Enze Peng
+ * @author Huw Collingbourne (from external resource)
  */
 public class Thing {
      // Basic Thing type that defines all objects in the Adventure
