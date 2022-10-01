@@ -1,4 +1,4 @@
-package function;
+package test.java.function;
 
 import gameobjects.Grocery;
 
