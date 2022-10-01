@@ -29,7 +29,7 @@ public class PlayerTestL{
         AG.game=new Game();
         AG.game.runCommand("e");
         output=AG.game.runCommand("take grass");
-        assertEquals("grass taken!",output);
+        assertEquals("grass is not here",output);
     }
 
 }
