@@ -47,8 +47,12 @@ public class BattleSystem implements java.io.Serializable{
                 buff=0;//clear last round buff
             }
             else if(input ==2){
+                if (player.bag.size() == 0){
+                    print("You don`t have an item yet!");
+                }
+                else {
                 Item temp= getItems(player);
-                temp.useItem();
+                temp.useItem();}
             }
             else if(input==3){
                 print("You are in the " + player.getLocation().describe());
@@ -70,9 +74,9 @@ public class BattleSystem implements java.io.Serializable{
             }
             else if(et<=0){// fight result if the enemy is defeated
                 print("you have defeated the enemy "+e.getName());
-                player.xp=++e.expReward;//add experience value
+                player.xp= player.xp + e.expReward;//add experience value
                 print("you have got new XP from enemy for "+e.expReward+ " points");
-                player.gold=++e.goldReward;//add gold
+                player.gold= player.gold + e.goldReward;//add gold
                 print("you have gained "+e.expReward+ " gold from this battle, you have "+player.gold+" gold now.");
                 player.checkUpgrade();//check grade of level to see whether upgrade player level
                 print("you have gained the weapon "+e.treasure.getName()+" !");
