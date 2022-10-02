@@ -12,8 +12,8 @@ member_declaration:
     name: Xuan Ngo
     uid: u7306766
   -
-    name: 
-    uid:
+    name: Qiuyu Chen
+    uid: u7242427
   -
     name: 
     uid:
