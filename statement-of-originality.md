@@ -24,4 +24,7 @@ member_declaration:
 # list numbered references below (replace the example with your own references) 
 ---
 # References
-- [1] Example Author. 2022. p5.js example code video. Retrieved from https://example.com/video
+- Bitwisebooks.com. 2022. [online] Available at: <http://bitwisebooks.com> [Accessed 2 October 2022].
+- codestudent. 2022. [online] Available at: <https://codestudent.net> [Accessed 2 October 2022].
+- Youtube.com. 2022. [online] Available at: <https://www.youtube.com/watch?v=u3PRtZpqb1A&t=2s> [Accessed 2 October 2022].
+
