@@ -15,11 +15,11 @@ member_declaration:
     name: Qiuyu Chen
     uid: u7242427
   -
-    name: 
-    uid:
+    name: Sijie Fan
+    uid: u7253519
   -
-    name: 
-    uid:
+    name: Enze Peng
+    uid: u7341252
 
 # list numbered references below (replace the example with your own references) 
 ---
