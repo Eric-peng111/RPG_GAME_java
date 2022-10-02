@@ -4,6 +4,8 @@ As a player, I want to be able to attack the enemy so that I can clear the obsta
 
 As a player, I want to upgrade by defeating enemies so that I can increase the attack power to pass the level more easily.
 
+As a player, I want to get special items after defeating enemies so that I can collect them and become stronger.
+
 As a player, I want to upgrade by collecting money so that I can increase the amount of blood and not die easily.
 
 Jack 
@@ -33,9 +35,7 @@ As a Developer, I want to allow players to select previous levels they pass so t
 
 **Weapons**
 
-As a Player, I want melee, range and magic weapons to able to explore different types of combat.
-
-As a Player, I want to upgrade my weapons to allow myself to use my favourite weapons throughout the game in more difficult levels.
+As a Player, I want to be able to use different types of weapons in the game so that fighting can have more variety and more fun.
 
 
 Claude c (Inventory system and Chest)：
